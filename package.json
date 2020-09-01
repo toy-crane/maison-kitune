@@ -1,0 +1,27 @@
+{
+	"name": "maison-kitsune",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "ts-node src/index.ts"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@prisma/cli": "^2.5.1",
+		"@types/node": "^14.6.1",
+		"ts-node": "^9.0.0",
+		"typescript": "^4.0.2"
+	},
+	"dependencies": {
+		"@graphql-tools/load-files": "^6.1.0",
+		"@graphql-tools/merge": "^6.1.0",
+		"@graphql-tools/schema": "^6.1.0",
+		"@prisma/client": "^2.5.1",
+		"apollo-server": "^2.17.0",
+		"graphql": "^15.3.0"
+	}
+}
