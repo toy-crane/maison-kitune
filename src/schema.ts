@@ -7,8 +7,8 @@ const allTypes = loadFilesSync(path.join(__dirname, "/gql/**/*.gql"));
 const allResolvers = loadFilesSync(path.join(__dirname, "/gql/**/*.ts"));
 
 const schema = makeExecutableSchema({
-	typeDefs: [mergeTypeDefs(allTypes)],
-	resolvers: { ...mergeResolvers(allResolvers) },
+  typeDefs: mergeTypeDefs(allTypes),
+  resolvers: mergeResolvers(allResolvers),
 });
 
 export default schema;

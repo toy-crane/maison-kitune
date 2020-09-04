@@ -58,7 +58,7 @@
     "@graphql-tools/utils" "6.1.0"
     tslib "~2.0.1"
 
-"@graphql-tools/schema@6.1.0", "@graphql-tools/schema@^6.1.0":
+"@graphql-tools/schema@6.1.0", "@graphql-tools/schema@^6.0.9", "@graphql-tools/schema@^6.1.0":
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/@graphql-tools/schema/-/schema-6.1.0.tgz#8176bf3b56dc1e78243a5f01646c7abbc9921d26"
   integrity sha512-AZflTf9HU3Uy8UgUwxwFXN9Lf+9D36LBoDRIxPRhsj6EtawbwCqsd3UFwNek0OgiwNi3BL2b+D+6QEcw2IOsDA==
@@ -66,7 +66,7 @@
     "@graphql-tools/utils" "6.1.0"
     tslib "~2.0.1"
 
-"@graphql-tools/utils@6.1.0":
+"@graphql-tools/utils@6.1.0", "@graphql-tools/utils@^6.0.9":
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-6.1.0.tgz#a8ab67bb8d8a879f40d29b334f48de6e6be71c41"
   integrity sha512-YcyslZ/8rk5nQOGnkEDp/xi6Xphu0mgjh5LTZ1qUio5P+d95/9MW44cPdmi3Feg4kO8u+1GcPC+685hFpJlZJw==
@@ -1242,6 +1242,15 @@ graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0:
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.4.tgz#2256bde14d3632958c465ebc96dc467ca07a29fb"
   integrity sha512-WjKPNJF79dtJAVniUlGGWHYGz2jWxT6VhN/4m1NdkbZ2nOsEF+cI1Edgql5zCRhs/VsQYRvrXctxktVXZUkixw==
 
+graphql-constraint-directive@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/graphql-constraint-directive/-/graphql-constraint-directive-2.1.0.tgz#30a737720825bc8042e0fffe6cc7f666d69df9b5"
+  integrity sha512-gd8wKppP5ZlDm3EALZUwkSNSP7vTdbDECIVDAMnCX+ZaN1s+qNgStuMT8vQ46BKu0h27zcOsX9Kn/TKDjf8dig==
+  dependencies:
+    "@graphql-tools/schema" "^6.0.9"
+    "@graphql-tools/utils" "^6.0.9"
+    validator "^10.2.0"
+
 graphql-extensions@^0.12.4:
   version "0.12.4"
   resolved "https://registry.yarnpkg.com/graphql-extensions/-/graphql-extensions-0.12.4.tgz#c0aa49a20f983a2da641526d1e505996bd2b4188"
@@ -2396,6 +2405,11 @@ uuid@^8.0.0:
   version "8.3.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.0.tgz#ab738085ca22dc9a8c92725e459b1d507df5d6ea"
   integrity sha512-fX6Z5o4m6XsXBdli9g7DtWgAx+osMsRRZFKma1mIUsLCz6vRvv+pz5VNbyu9UEDzpMWulZfvpgb/cmDXVulYFQ==
+
+validator@^10.2.0:
+  version "10.11.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-10.11.0.tgz#003108ea6e9a9874d31ccc9e5006856ccd76b228"
+  integrity sha512-X/p3UZerAIsbBfN/IwahhYaBbY68EN/UQBWHtsbXGT5bfrH/p4NQzUCG1kF/rtKaNpnJ7jAu6NGTdSNtyNIXMw==
 
 vary@^1, vary@~1.1.2:
   version "1.1.2"
