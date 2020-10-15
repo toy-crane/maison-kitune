@@ -5,7 +5,7 @@ import createJWT from "../../../utils/auth/createJWT";
 
 const mutation: IResolvers = {
   Mutation: {
-    login: async (_, { email, password }, ctx: Context) => {
+    signIn: async (_, { email, password }, ctx: Context) => {
       const { prisma } = ctx;
       const user = await prisma.user.findOne({
         where: {

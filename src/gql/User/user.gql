@@ -5,7 +5,7 @@ type User {
   username: String
 }
 
-type LoginResponse {
+type SignInResponse {
   user: User
   token: String
 }
