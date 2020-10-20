@@ -1,11 +1,19 @@
 import { PrismaClient } from "@prisma/client";
+import { Request, Response } from "express";
+import { UserPersonalData } from "./gql/User/user";
+import getUser from "./utils/auth/getUser";
 
-const prisma = new PrismaClient();
-
+export const prisma = new PrismaClient();
 export interface Context {
-	prisma: PrismaClient;
+  prisma: PrismaClient;
+  req: Request;
+  res: Response;
+  user: UserPersonalData;
 }
 
-export function createContext(): Context {
-	return { prisma };
+export async function createContext(
+  req: Request,
+  res: Response
+): Promise<Context> {
+  return { prisma, req, res, user: await getUser(req, res) };
 }

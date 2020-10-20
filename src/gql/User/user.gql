@@ -1,11 +1,10 @@
-type User {
-  id: ID!
+type UserPersonalData {
   email: String!
   name: String!
   username: String
 }
 
 type SignInResponse {
-  user: User
+  user: UserPersonalData
   token: String
 }

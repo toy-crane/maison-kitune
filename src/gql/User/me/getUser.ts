@@ -3,13 +3,9 @@ import { Context } from "../../../context";
 
 const query: IResolvers = {
   Query: {
-    user: async (_, { id }, ctx: Context) => {
-      const { prisma } = ctx;
-      const user = await prisma.user.findOne({
-        where: {
-          id,
-        },
-      });
+    me: async (_, __, ctx: Context) => {
+      const { user } = ctx;
+      console.log(user);
       return user;
     },
   },
