@@ -15,5 +15,6 @@ export async function createContext(
   req: Request,
   res: Response
 ): Promise<Context> {
-  return { prisma, req, res, user: await getUser(req, res) };
+  const context = { prisma, req, res, user: await getUser(req, res) };
+  return context;
 }
