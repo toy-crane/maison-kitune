@@ -22,8 +22,8 @@ const mutation: IResolvers = {
           resetTokenExpiry,
         },
       });
-      const origin = process.env.ORIGIN;
-      const resetUrl = `${origin}/reset-password/?token=${resetToken}`;
+      const clientUrl = process.env.CLIENT_URL;
+      const resetUrl = `${clientUrl}/reset-password/?token=${resetToken}`;
       sendResetPasswordEmail(resetUrl, user.email);
       return true;
     },
