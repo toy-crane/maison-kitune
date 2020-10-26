@@ -4,10 +4,11 @@ import schema from "./schema";
 import passport from "passport";
 import { createContext } from "./context";
 
+const ORIGIN = process.env.ORIGIN;
 const PORT = process.env.PORT;
 passport.initialize();
 const server = new ApolloServer({ schema, context: createContext });
 
-server.listen({ port: PORT }).then(({ url }) => {
+server.listen({ url: ORIGIN, port: PORT }).then(({ url }) => {
   console.log(`🚀  Server ready at ${url}`);
 });
