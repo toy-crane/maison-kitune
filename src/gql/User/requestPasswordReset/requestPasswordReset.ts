@@ -5,7 +5,7 @@ import { sendResetPasswordEmail } from "../../../utils/mail/sendMail";
 
 const mutation: IResolvers = {
   Mutation: {
-    requestReset: async (_, { email }, ctx: Context) => {
+    requestPasswordReset: async (_, { email }, ctx: Context) => {
       const { prisma } = ctx;
       const user = await prisma.user.findOne({
         where: { email },
@@ -28,7 +28,7 @@ const mutation: IResolvers = {
       const clientUrl = process.env.CLIENT_URL;
       const resetUrl = `${clientUrl}/reset-password/?token=${resetToken}`;
       sendResetPasswordEmail(resetUrl, user.email);
-      return true;
+      return { email };
     },
   },
 };
