@@ -5,9 +5,12 @@ import { sendResetPasswordEmail } from "../../../utils/mail/sendMail";
 
 const mutation: IResolvers = {
   Mutation: {
-    requestReset: async (_, __, ctx: Context) => {
-      const { prisma, user } = ctx;
-      console.log(ctx);
+    requestReset: async (_, { email }, ctx: Context) => {
+      const { prisma } = ctx;
+      const user = await prisma.user.findOne({
+        where: { email },
+        select: { email: true, name: true, username: true, id: true },
+      });
       if (!user) {
         throw new Error("Wrong Email");
       }
