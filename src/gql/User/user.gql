@@ -2,9 +2,14 @@ type UserPersonalData {
   email: String!
   name: String!
   username: String
+  isActive: Boolean!
 }
 
 type SignInResponse {
   user: UserPersonalData
   token: String
+}
+
+type SignUpResponse {
+  user: UserPersonalData
 }

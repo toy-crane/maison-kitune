@@ -1,7 +1,8 @@
 import { IResolvers } from "graphql-tools";
 import * as bcrypt from "bcryptjs";
 import { Context } from "../../../context";
-import createJWT from "../../../utils/auth/createJWT";
+import createRandomToken from "../../../utils/auth/createSecret";
+import { sendActivateAccountEmail } from "../../../utils/mail/sendMail";
 
 const mutation: IResolvers = {
   Mutation: {
@@ -38,12 +39,20 @@ const mutation: IResolvers = {
               username,
               email,
               password: hashedPassword,
+              isActive: false,
             },
           });
-          const token = createJWT(user.id, email);
+          const clientUrl = process.env.CLIENT_URL;
+          const activationToken = createRandomToken();
+          const activateUrl = `${clientUrl}/activate-account/?activationToken=${activationToken}`;
+          try {
+            sendActivateAccountEmail(activateUrl, user.email);
+          } catch (e) {
+            console.log(e);
+            throw Error("이메일 발송에 실패했습니다.");
+          }
           return {
             user,
-            token,
           };
         } catch (err) {
           throw Error(err);

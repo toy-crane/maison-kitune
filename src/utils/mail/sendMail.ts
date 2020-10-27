@@ -45,4 +45,14 @@ const sendResetPasswordEmail = (url: string, address: string) => {
   sendMail(email);
 };
 
-export { sendSecretMail, sendResetPasswordEmail };
+const sendActivateAccountEmail = (url: string, address: string) => {
+  const email: email = {
+    from: process.env.NODEMAILER_USER,
+    to: address,
+    subject: "이메일 인증",
+    html: `<div>아래의 URL을 통해 회원가입을 완료해주세요.</div><div>${url}</div>`,
+  };
+  sendMail(email);
+};
+
+export { sendSecretMail, sendResetPasswordEmail, sendActivateAccountEmail };
