@@ -22,7 +22,7 @@ const mutation: IResolvers = {
           },
         },
       });
-      if (!user) {
+      if (!user.length) {
         throw Error("reset token이 잘못되었거나 유효기간이 초과되었습니다.");
       }
       const hashedPassword = await bcrypt.hash(password, 10);

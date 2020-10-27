@@ -26,7 +26,7 @@ const mutation: IResolvers = {
         },
       });
       const clientUrl = process.env.CLIENT_URL;
-      const resetUrl = `${clientUrl}/reset-password/?token=${resetToken}`;
+      const resetUrl = `${clientUrl}/reset-password/?resetToken=${resetToken}`;
       sendResetPasswordEmail(resetUrl, user.email);
       return { email };
     },
