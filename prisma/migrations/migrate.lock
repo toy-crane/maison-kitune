@@ -4,3 +4,5 @@
 20200901032709-add-username--password
 20201024073529-create-reset-token
 20201027092337-is-active
+20201027095013-verification-token
+20201027095219-change-verification-token

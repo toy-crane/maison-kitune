@@ -43,8 +43,18 @@ const mutation: IResolvers = {
             },
           });
           const clientUrl = process.env.CLIENT_URL;
-          const activationToken = createRandomToken();
-          const activateUrl = `${clientUrl}/activate-account/?activationToken=${activationToken}`;
+          const verificationToken = createRandomToken();
+          await prisma.verificationToken.create({
+            data: {
+              verificationToken,
+              user: {
+                connect: {
+                  id: user.id
+                },
+              },
+            },
+          });
+          const activateUrl = `${clientUrl}/activate-account/?verificationToken=${verificationToken}`;
           try {
             sendActivateAccountEmail(activateUrl, user.email);
           } catch (e) {

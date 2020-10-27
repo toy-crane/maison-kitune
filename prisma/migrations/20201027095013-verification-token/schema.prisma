@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -44,7 +44,7 @@ model VerificationToken {
   id      Int      @default(autoincrement()) @id
   user   User    @relation(fields: [userId], references: [id])
   userId Int     @unique
-  verificationToken String
+  resetToken String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
