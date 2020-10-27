@@ -5,8 +5,15 @@ import createJWT from "../../../utils/auth/createJWT";
 
 const mutation: IResolvers = {
   Mutation: {
-    signUp: async (_, { name, username, email, password }, ctx: Context) => {
+    signUp: async (
+      _,
+      { name, username, email, password, confirmPassword },
+      ctx: Context
+    ) => {
       const { prisma } = ctx;
+      if (password !== confirmPassword) {
+        throw new Error("비밀번호가 잘못되었습니다.");
+      }
       const hasSameEMail = await prisma.user.findOne({
         where: {
           email,
@@ -19,9 +26,9 @@ const mutation: IResolvers = {
       });
 
       if (hasSameEMail) {
-        return new Error("Email Already exists");
+        return new Error("이미 존재하는 이메일입니다.");
       } else if (hasSameUsername) {
-        return new Error("username Already exists");
+        return new Error("이미 존재하는 유저 이름입니다.");
       } else {
         try {
           const hashedPassword = await bcrypt.hash(password, 10);
@@ -40,7 +47,6 @@ const mutation: IResolvers = {
           };
         } catch (err) {
           throw Error(err);
-          return;
         }
       }
     },
