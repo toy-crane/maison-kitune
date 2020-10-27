@@ -39,7 +39,7 @@ const mutation: IResolvers = {
             token,
           };
         } catch (err) {
-          console.log(err);
+          throw Error(err);
           return;
         }
       }

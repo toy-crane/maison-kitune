@@ -5,7 +5,6 @@ const query: IResolvers = {
   Query: {
     me: async (_, __, ctx: Context) => {
       const { user } = ctx;
-      console.log(user);
       return user;
     },
   },
