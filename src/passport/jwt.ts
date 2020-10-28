@@ -17,7 +17,6 @@ const verifyUser: VerifiedCallback = async (payload, done) => {
   try {
     const user = await prisma.user.findOne({
       where: { id: payload.id },
-      select: { email: true, name: true, username: true, id: true },
     });
     if (user) {
       return done(null, user);
