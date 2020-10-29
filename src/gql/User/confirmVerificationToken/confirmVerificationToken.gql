@@ -1,0 +1,6 @@
+type Mutation {
+  confirmVerificationToken(
+    verificationToken: String!
+    email: String!
+  ): SignInResponse!
+}
