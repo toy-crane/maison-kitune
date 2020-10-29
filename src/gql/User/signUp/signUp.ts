@@ -49,12 +49,12 @@ const mutation: IResolvers = {
               verificationToken,
               user: {
                 connect: {
-                  id: user.id
+                  id: user.id,
                 },
               },
             },
           });
-          const activateUrl = `${clientUrl}/activate-account/?verificationToken=${verificationToken}`;
+          const activateUrl = `${clientUrl}/confirm-verification/?verificationToken=${verificationToken}`;
           try {
             sendActivateAccountEmail(activateUrl, user.email);
           } catch (e) {
