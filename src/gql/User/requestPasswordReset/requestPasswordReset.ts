@@ -10,7 +10,7 @@ const mutation: IResolvers = {
       const { prisma } = ctx;
       const user = await prisma.user.findOne({
         where: { email },
-        select: { email: true, name: true, username: true, id: true },
+        select: { email: true, name: true, id: true },
       });
       if (!user) {
         throw new Error("Wrong Email");

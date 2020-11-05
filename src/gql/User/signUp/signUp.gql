@@ -4,6 +4,5 @@ type Mutation {
     email: String!
     password: String!
     confirmPassword: String!
-    username: String!
   ): SignUpResponse!
 }

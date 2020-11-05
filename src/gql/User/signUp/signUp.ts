@@ -9,7 +9,7 @@ const mutation: IResolvers = {
   Mutation: {
     signUp: async (
       _,
-      { name, username, email, password, confirmPassword },
+      { name, email, password, confirmPassword },
       ctx: Context
     ) => {
       const { prisma } = ctx;
@@ -21,23 +21,14 @@ const mutation: IResolvers = {
           email,
         },
       });
-      const hasSameUsername = await prisma.user.findOne({
-        where: {
-          username,
-        },
-      });
-
       if (hasSameEMail) {
         return new Error("이미 존재하는 이메일입니다.");
-      } else if (hasSameUsername) {
-        return new Error("이미 존재하는 유저 이름입니다.");
       } else {
         try {
           const hashedPassword = await bcrypt.hash(password, 10);
           const user = await prisma.user.create({
             data: {
               name,
-              username,
               email,
               password: hashedPassword,
               isActive: false,
