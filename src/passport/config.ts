@@ -1,5 +1,5 @@
 import { ExtractJwt } from "passport-jwt";
-
+import env from "../env";
 const providers = ["google", "github"];
 
 const callbacks = providers.map((provider) => {
@@ -11,20 +11,20 @@ const callbacks = providers.map((provider) => {
 const [googleURL, githubURL] = callbacks;
 
 const GOOGLE_CONFIG = {
-  clientID: process.env.GOOGLE_CLIENT_ID,
-  clientSecret: process.env.GOOGLE_SECRET,
+  clientID: env.google_client_id,
+  clientSecret: env.google_secret,
   callbackURL: googleURL,
 };
 
 const GITHUB_CONFIG = {
-  clientID: process.env.GITHUB_CLIENT_ID,
-  clientSecret: process.env.GITHUB_SECRET,
+  clientID: env.github_client_id,
+  clientSecret: env.github_secret,
   callbackURL: githubURL,
 };
 
 const JWT_CONFIG = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: process.env.JWT_SECRET,
+  secretOrKey: env.jwt_secret,
 };
 
 export { GOOGLE_CONFIG, GITHUB_CONFIG, JWT_CONFIG };
