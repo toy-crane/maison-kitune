@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import env from "../../env";
 
 type email = {
   from: string | undefined;
@@ -11,8 +12,8 @@ const sendMail = (email: email) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: process.env.NODEMAILER_USER,
-      pass: process.env.NODEMAILER_PASSWORD,
+      user: env.nodemailer_user,
+      pass: env.nodemailer_password,
     },
   });
 
@@ -27,7 +28,7 @@ const sendMail = (email: email) => {
 
 const sendSecretMail = (secret: string, address: string) => {
   const email: email = {
-    from: process.env.NODEMAILER_USER,
+    from: env.nodemailer_user,
     to: address,
     subject: "이메일 인증",
     html: `Hello! Your login secret is <strong>${secret}</strong>.<br/>Copy paste on the app/website to log in`,
@@ -37,7 +38,7 @@ const sendSecretMail = (secret: string, address: string) => {
 
 const sendResetPasswordEmail = (url: string, address: string) => {
   const email: email = {
-    from: process.env.NODEMAILER_USER,
+    from: env.nodemailer_user,
     to: address,
     subject: "비밀번호 초기화",
     html: `<div>아래의 URL을 통해 비밀번호를 초기화 해주세요.</div><div>${url}</div>`,
@@ -47,7 +48,7 @@ const sendResetPasswordEmail = (url: string, address: string) => {
 
 const sendActivateAccountEmail = (url: string, address: string) => {
   const email: email = {
-    from: process.env.NODEMAILER_USER,
+    from: env.nodemailer_user,
     to: address,
     subject: "이메일 인증",
     html: `<div>아래의 URL을 통해 회원가입을 완료해주세요.</div><div>${url}</div>`,

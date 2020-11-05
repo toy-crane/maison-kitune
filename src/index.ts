@@ -7,9 +7,10 @@ import passport from "passport";
 import { createContext } from "./context";
 import router from "./router";
 import passportInit from "./passport/passport.init";
+import env from "./env";
 
-const ORIGIN = process.env.ORIGIN;
-const PORT = process.env.PORT;
+const ORIGIN = env.origin;
+const PORT = env.port;
 
 const server = new ApolloServer({ schema, context: createContext });
 
@@ -22,7 +23,7 @@ app.use(passport.initialize());
 // session 초기화
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || "SECRET",
+    secret: env.session_secret,
     resave: false,
     saveUninitialized: true,
   })

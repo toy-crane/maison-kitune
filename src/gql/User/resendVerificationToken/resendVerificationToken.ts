@@ -1,8 +1,8 @@
 import { IResolvers } from "graphql-tools";
 import { Context } from "../../../context";
+import env from "../../../env";
 import createRandomToken from "../../../utils/auth/createSecret";
 import { sendActivateAccountEmail } from "../../../utils/mail/sendMail";
-
 const query: IResolvers = {
   Mutation: {
     resendVerificationToken: async (_, { email }, ctx: Context) => {
@@ -16,7 +16,8 @@ const query: IResolvers = {
       if (!users.length) {
         throw Error("잘못된 이메일입니다.");
       }
-      const clientUrl = process.env.CLIENT_URL;
+
+      const clientUrl = env.client_url;
       const verificationToken = createRandomToken();
       await prisma.verificationToken.create({
         data: {

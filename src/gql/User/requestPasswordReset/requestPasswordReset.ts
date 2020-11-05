@@ -1,5 +1,6 @@
 import { IResolvers } from "graphql-tools";
 import { Context } from "../../../context";
+import env from "../../../env";
 import createRandomToken from "../../../utils/auth/createSecret";
 import { sendResetPasswordEmail } from "../../../utils/mail/sendMail";
 
@@ -25,7 +26,7 @@ const mutation: IResolvers = {
           resetTokenExpiry,
         },
       });
-      const clientUrl = process.env.CLIENT_URL;
+      const clientUrl = env.client_url;
       const resetUrl = `${clientUrl}/reset-password/?resetToken=${resetToken}`;
       sendResetPasswordEmail(resetUrl, user.email);
       return { email };

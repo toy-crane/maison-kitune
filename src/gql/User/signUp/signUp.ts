@@ -3,6 +3,7 @@ import * as bcrypt from "bcryptjs";
 import { Context } from "../../../context";
 import createRandomToken from "../../../utils/auth/createSecret";
 import { sendActivateAccountEmail } from "../../../utils/mail/sendMail";
+import env from "../../../env";
 
 const mutation: IResolvers = {
   Mutation: {
@@ -42,7 +43,7 @@ const mutation: IResolvers = {
               isActive: false,
             },
           });
-          const clientUrl = process.env.CLIENT_URL;
+          const clientUrl = env.client_url;
           const verificationToken = createRandomToken();
           await prisma.verificationToken.create({
             data: {
