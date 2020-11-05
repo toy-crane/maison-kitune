@@ -1,17 +1,9 @@
 import passport from "passport";
 import { Response } from "express";
-import {
-  Strategy as JWTStrategy,
-  ExtractJwt,
-  VerifiedCallback,
-} from "passport-jwt";
+import { Strategy as JWTStrategy, VerifiedCallback } from "passport-jwt";
 import { prisma } from "../context";
 import { UserPersonalData } from "../gql/User/user";
-
-const jwt_options = {
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: process.env.JWT_SECRET,
-};
+import { JWT_CONFIG } from "./config";
 
 const verifyUser: VerifiedCallback = async (payload, done) => {
   try {
@@ -28,8 +20,7 @@ const verifyUser: VerifiedCallback = async (payload, done) => {
   }
 };
 
-passport.use(new JWTStrategy(jwt_options, verifyUser));
-
+passport.use(new JWTStrategy(JWT_CONFIG, verifyUser));
 export const authenticateJWT = (
   originReq: any,
   res: Response
