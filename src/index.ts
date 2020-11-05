@@ -13,7 +13,13 @@ const PORT = process.env.PORT;
 
 const server = new ApolloServer({ schema, context: createContext });
 
+// 미들 웨어 순서 중요함.
 const app = express();
+
+// passport 관련 초기화
+passportInit();
+app.use(passport.initialize());
+// session 초기화
 app.use(
   session({
     secret: process.env.SESSION_SECRET || "SECRET",
@@ -21,11 +27,8 @@ app.use(
     saveUninitialized: true,
   })
 );
+// router 추가
 app.use("/", router);
-
-// passport 관련 초기화
-app.use(passport.initialize());
-passportInit();
 
 server.applyMiddleware({ app });
 

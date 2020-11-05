@@ -5,9 +5,8 @@ const providers = ["google", "github"];
 const callbacks = providers.map((provider) => {
   return process.env.NODE_ENV === "production"
     ? `https://react-auth-twitter.herokuapp.com/${provider}/callback`
-    : `https://localhost:5000/${provider}/callback`;
+    : `http://localhost:4000/${provider}/callback`;
 });
-
 const [googleURL, githubURL] = callbacks;
 
 const GOOGLE_CONFIG = {
@@ -20,6 +19,7 @@ const GITHUB_CONFIG = {
   clientID: env.github_client_id,
   clientSecret: env.github_secret,
   callbackURL: githubURL,
+  scope: ["user:email"],
 };
 
 const JWT_CONFIG = {

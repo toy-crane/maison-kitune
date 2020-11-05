@@ -1,5 +1,6 @@
 import express from "express";
 import { Request, Response } from "express";
+import { githubAuth, githubController } from "./passport/github";
 
 const router = express.Router();
 
@@ -11,9 +12,8 @@ router.use((req: Request, res: Response, next) => {
   next();
 });
 
-router.get("/github", (req, res) => {
-  res.send("github");
-});
+router.get("/github", githubAuth);
+router.get("/github/callback", githubAuth, githubController);
 router.get("/google", (req, res) => {
   res.send("google");
 });
