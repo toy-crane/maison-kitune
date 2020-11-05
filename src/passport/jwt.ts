@@ -1,8 +1,15 @@
 import passport from "passport";
 import { Response } from "express";
 import { UserPersonalData } from "../gql/User/user";
+import { ExtractJwt } from "passport-jwt";
+import env from "../env";
 
-export const authenticateJWT = (
+const JWT_CONFIG = {
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: env.jwt_secret,
+};
+
+const authenticateJWT = (
   originReq: any,
   res: Response
 ): Promise<UserPersonalData> => {
@@ -20,3 +27,5 @@ export const authenticateJWT = (
     )(req, res);
   });
 };
+
+export { authenticateJWT, JWT_CONFIG };
