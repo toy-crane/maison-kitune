@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import e from "cors";
 import { Request, Response } from "express";
 import { UserPersonalData } from "./gql/User/user";
 
@@ -7,18 +8,27 @@ export interface Context {
   prisma: PrismaClient;
   req: Request;
   res: Response;
-  user: UserPersonalData;
+  user: UserPersonalData | null;
+}
+
+function getUser(req: any) {
+  // socket과 일반 graphql간에 request type이 달라서 분기처리 해야함.
+  if (req.request && req.request.user) {
+    return req.request.user;
+  } else {
+    return null;
+  }
 }
 
 export async function createContext(
-  { request: req }: any,
+  req: Request,
   res: Response
 ): Promise<Context> {
   const context = {
     prisma,
     req,
     res,
-    user: req.user,
+    user: getUser(req),
   };
   return context;
 }

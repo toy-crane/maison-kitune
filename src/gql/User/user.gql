@@ -12,3 +12,8 @@ type SignInResponse {
 type SignUpResponse {
   user: UserPersonalData
 }
+
+type SocketResponse {
+  user: UserPersonalData
+  socketId: String
+}
