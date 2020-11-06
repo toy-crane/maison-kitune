@@ -12,6 +12,7 @@ const googleAuth = passport.authenticate("google", {
   scope: ["email", "profile"],
 });
 const googleController = (req: any, res: any) => {
+  console.log(req.user);
   const user = {
     name: req.user.displayName,
     photo: req.user.photos[0].value.replace(/sz=50/gi, "sz=250"),

@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -23,7 +23,7 @@ model Post {
 model Profile {
   id     Int     @default(autoincrement()) @id
   bio    String?
-  avatar String?
+  avata  String?
   user   User    @relation(fields: [userId], references: [id])
   userId Int     @unique
 }
@@ -35,7 +35,7 @@ model User {
   name    String?
   posts   Post[]
   profile Profile?
-  githubId String?
+  githubId Int?
   googleId String?
   resetToken String?
   resetTokenExpiry Int?

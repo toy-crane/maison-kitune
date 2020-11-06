@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -35,7 +35,7 @@ model User {
   name    String?
   posts   Post[]
   profile Profile?
-  githubId String?
+  githubId Int?
   googleId String?
   resetToken String?
   resetTokenExpiry Int?
