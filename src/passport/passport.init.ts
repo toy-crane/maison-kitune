@@ -6,6 +6,7 @@ import { prisma } from "../context";
 import { GITHUB_CONFIG } from "./github";
 import { GOOGLE_CONFIG } from "./google";
 import { JWT_CONFIG } from "./jwt";
+
 // Oauth에서 사용하는 콜백
 const OauthCallback = (
   accessToken: String,

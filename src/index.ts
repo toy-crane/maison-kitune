@@ -1,38 +1,40 @@
 import "./env";
-import { ApolloServer } from "apollo-server-express";
-import express from "express";
+import { GraphQLServer } from "graphql-yoga";
 import session from "express-session";
-import schema from "./schema";
+import { resolvers, typeDefs } from "./schema";
 import passport from "passport";
 import { createContext } from "./context";
 import router from "./router";
 import passportInit from "./passport/passport.init";
 import env from "./env";
 
-const ORIGIN = env.origin;
-const PORT = env.port;
+const server = new GraphQLServer({
+  typeDefs,
+  resolvers,
+  context: createContext,
+});
 
-const server = new ApolloServer({ schema, context: createContext });
-
-// 미들 웨어 순서 중요함.
-const app = express();
-
+// express 미들웨어 순서 중요!
 // passport 관련 초기화
 passportInit();
-app.use(passport.initialize());
+server.express.use(passport.initialize());
+
 // session 초기화
-app.use(
+server.express.use(
   session({
     secret: env.session_secret,
     resave: false,
     saveUninitialized: true,
   })
 );
+
 // router 추가
-app.use("/", router);
+server.express.use("/", router);
 
-server.applyMiddleware({ app });
-
-app.listen({ url: ORIGIN, port: PORT }, () =>
-  console.log(`🚀 Server ready at ${ORIGIN}:${PORT}${server.graphqlPath}`)
+// Graphql Yoga 실행
+server.start(
+  {
+    playground: "/playground",
+  },
+  () => console.log("Server is running on localhost:4000")
 );

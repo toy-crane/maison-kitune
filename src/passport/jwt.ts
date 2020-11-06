@@ -13,7 +13,8 @@ const authenticateJWT = (
   originReq: any,
   res: Response
 ): Promise<UserPersonalData> => {
-  const { req } = originReq;
+  // graphql-yoga는 한 번 감싸져 있어서 추가로 꺼내줘야 함.
+  const { request: req } = originReq;
   return new Promise((resolve, reject) => {
     passport.authenticate(
       "jwt",
