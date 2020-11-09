@@ -32,7 +32,6 @@ const jwtCallback: VerifiedCallback = async (payload, cb) => {
 };
 
 export default () => {
-  // session에서 user를 사용하도록 함
   passport.serializeUser((user, cb) => cb(null, user));
   passport.deserializeUser((obj, cb) => cb(null, obj));
   passport.use(new GithubStrategy(GITHUB_CONFIG, OauthCallback));

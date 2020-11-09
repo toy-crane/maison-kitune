@@ -52,8 +52,7 @@ const githubController = async (req: any, res: any) => {
       });
     }
   }
-  const socketId = req.session.socketId;
-  console.log({ socketId, user, token });
+  res.cookie("token", token, { httpOnly: true });
   res.end();
 };
 

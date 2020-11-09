@@ -1,12 +1,11 @@
 import "./env";
 import { GraphQLServer } from "graphql-yoga";
-import session from "express-session";
+import cookieParser from "cookie-parser";
 import { resolvers, typeDefs } from "./schema";
 import passport from "passport";
 import { createContext } from "./context";
 import router from "./router";
 import passportInit from "./passport/passport.init";
-import env from "./env";
 import { authenticateJWT } from "./passport/jwt";
 
 const server = new GraphQLServer({
@@ -19,18 +18,10 @@ const server = new GraphQLServer({
 // passport 관련 초기화
 passportInit();
 server.express.use(passport.initialize());
-// jwt 인증 미들웨어 
+// jwt 인증 미들웨어
 server.express.use(authenticateJWT);
-
-// session 초기화
-server.express.use(
-  session({
-    secret: env.session_secret,
-    resave: false,
-    saveUninitialized: true,
-  })
-);
-
+// cookie parsert 미들웨어
+server.express.use(cookieParser());
 // router 추가
 server.express.use("/", router);
 
