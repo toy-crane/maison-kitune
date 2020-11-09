@@ -7,6 +7,7 @@ import { createContext } from "./context";
 import router from "./router";
 import passportInit from "./passport/passport.init";
 import { authenticateJWT } from "./passport/jwt";
+import env from "./env";
 
 const server = new GraphQLServer({
   typeDefs,
@@ -25,10 +26,16 @@ server.express.use(cookieParser());
 // router 추가
 server.express.use("/", router);
 
+const corsOptions = {
+  origin: env.client_url,
+  credentials: true,
+};
+
 // Graphql Yoga 실행
 server.start(
   {
     playground: "/playground",
+    cors: corsOptions,
   },
   () => console.log("Server is running on localhost:4000")
 );

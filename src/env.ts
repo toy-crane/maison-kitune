@@ -1,5 +1,7 @@
 import { config } from "dotenv";
 import { resolve } from "path";
+
+// dotenv loading
 config({ path: resolve(__dirname, ".env") });
 
 export default {
