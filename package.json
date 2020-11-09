@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon -e tsx,ts,gql -x ts-node src/index.ts",
+    "start": "nodemon -e tsx,ts,gql -x ts-node src/server.ts",
     "generate": "graphql-codegen --config codegen.yml"
   },
   "keywords": [],
@@ -36,6 +36,7 @@
     "@types/passport-jwt": "^3.0.3",
     "apollo-server": "^2.17.0",
     "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "crypto-random-string": "^3.3.0",
     "dotenv": "^8.2.0",
