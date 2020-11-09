@@ -14,7 +14,6 @@ const googleAuth = passport.authenticate("google", {
   scope: ["email", "profile"],
 });
 const googleController = async (req: any, res: any) => {
-  console.log(req.user);
   const email = req.user.emails[0].value;
   const photo = req.user.photos[0].value;
   const googleId = req.user.id;
