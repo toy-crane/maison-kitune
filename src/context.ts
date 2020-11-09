@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import e from "cors";
 import { Request, Response } from "express";
-import { UserPersonalData } from "./gql/User/user";
+import { UserPersonalData } from "./types/types";
 
 export const prisma = new PrismaClient();
 export interface Context {

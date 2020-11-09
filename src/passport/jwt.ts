@@ -1,6 +1,6 @@
 import passport from "passport";
 import { Response, Request, NextFunction } from "express";
-import { UserPersonalData } from "../gql/User/user";
+import { UserPersonalData } from "../types/types";
 import { ExtractJwt } from "passport-jwt";
 import env from "../env";
 
