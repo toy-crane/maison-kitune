@@ -11,7 +11,9 @@ const GITHUB_CONFIG = {
   scope: ["user:email"],
 };
 
-const githubAuth = passport.authenticate("github", { scope: ["user:email"] });
+const githubAuth = passport.authenticate("github", {
+  scope: ["user:email"],
+});
 const githubController = async (req: any, res: any) => {
   const githubId = req.user.id;
   const photo = req.user.photos[0].value;
@@ -53,6 +55,8 @@ const githubController = async (req: any, res: any) => {
     }
   }
   res.cookie("token", token, { httpOnly: true });
+  // 처음 요청한 페이지로 redirect
+  res.redirect(302, env.client_url);
   res.end();
 };
 
