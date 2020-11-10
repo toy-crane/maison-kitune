@@ -1,6 +1,6 @@
 type UserPersonalData {
   email: String!
-  name: String!
+  name: String
   isActive: Boolean!
 }
 

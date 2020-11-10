@@ -1,11 +1,16 @@
 import passport from "passport";
 import { Response, Request, NextFunction } from "express";
 import { UserPersonalData } from "../types/types";
-import { ExtractJwt } from "passport-jwt";
 import env from "../env";
 
 const JWT_CONFIG = {
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  jwtFromRequest: function (req) {
+    let token = null;
+    if (req && req.cookies) {
+      token = req.cookies["token"];
+    }
+    return token;
+  },
   secretOrKey: env.jwt_secret,
 };
 
@@ -16,6 +21,8 @@ const authenticateJWT = (req: Request, res: Response, next: NextFunction) =>
     (err, user: UserPersonalData) => {
       if (user) {
         req.user = user;
+      } else {
+        console.log(err);
       }
       next();
     }
