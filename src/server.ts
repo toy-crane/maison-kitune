@@ -27,7 +27,7 @@ server.express.use(authenticateJWT);
 server.express.use("/", router);
 
 const corsOptions = {
-  origin: env.client_url,
+  origin: [env.client_url],
   credentials: true,
 };
 
@@ -35,6 +35,7 @@ const corsOptions = {
 server.start(
   {
     playground: "/playground",
+    endpoint: "/graphql",
     cors: corsOptions,
   },
   () => console.log("Server is running on localhost:4000")

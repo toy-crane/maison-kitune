@@ -20,9 +20,8 @@ const authenticateJWT = (req: Request, res: Response, next: NextFunction) =>
     { session: false },
     (err, user: UserPersonalData) => {
       if (user) {
+        console.log(user);
         req.user = user;
-      } else {
-        console.log(err);
       }
       next();
     }
