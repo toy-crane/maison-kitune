@@ -3,17 +3,3 @@ type UserPersonalData {
   name: String
   isActive: Boolean!
 }
-
-type SignInResponse {
-  user: UserPersonalData
-  token: String
-}
-
-type SignUpResponse {
-  user: UserPersonalData
-}
-
-type SocketResponse {
-  user: UserPersonalData
-  socketId: String
-}

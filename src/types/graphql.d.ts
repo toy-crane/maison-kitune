@@ -1,7 +1,6 @@
 import { GraphQLResolveInfo } from 'graphql';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -11,94 +10,15 @@ export type Scalars = {
   Float: number;
 };
 
-export type Mutation = {
-  __typename?: 'Mutation';
-  confirmVerificationToken: SignInResponse;
-  requestPasswordReset?: Maybe<RequestPasswordResetResponse>;
-  resendVerificationToken: Scalars['Boolean'];
-  resetPassword: SignInResponse;
-  signIn: SignInResponse;
-  signUp: SignUpResponse;
-};
-
-
-export type MutationConfirmVerificationTokenArgs = {
-  verificationToken: Scalars['String'];
-  email: Scalars['String'];
-};
-
-
-export type MutationRequestPasswordResetArgs = {
-  email?: Maybe<Scalars['String']>;
-};
-
-
-export type MutationResendVerificationTokenArgs = {
-  email: Scalars['String'];
-};
-
-
-export type MutationResetPasswordArgs = {
-  password: Scalars['String'];
-  confirmPassword: Scalars['String'];
-  resetToken: Scalars['String'];
-};
-
-
-export type MutationSignInArgs = {
-  email: Scalars['String'];
-  password: Scalars['String'];
-};
-
-
-export type MutationSignUpArgs = {
-  name: Scalars['String'];
-  email: Scalars['String'];
-  password: Scalars['String'];
-  confirmPassword: Scalars['String'];
-};
-
 export type Query = {
   __typename?: 'Query';
   me: UserPersonalData;
 };
 
-export type RequestPasswordResetResponse = {
-  __typename?: 'requestPasswordResetResponse';
-  email: Scalars['String'];
-};
-
-export type SignInResponse = {
-  __typename?: 'SignInResponse';
-  user?: Maybe<UserPersonalData>;
-  token?: Maybe<Scalars['String']>;
-};
-
-export type SignUpResponse = {
-  __typename?: 'SignUpResponse';
-  user?: Maybe<UserPersonalData>;
-};
-
-export type SocketResponse = {
-  __typename?: 'SocketResponse';
-  user?: Maybe<UserPersonalData>;
-  socketId?: Maybe<Scalars['String']>;
-};
-
-export type Subscription = {
-  __typename?: 'Subscription';
-  startOAuth?: Maybe<SocketResponse>;
-};
-
-
-export type SubscriptionStartOAuthArgs = {
-  socketId: Scalars['String'];
-};
-
 export type UserPersonalData = {
   __typename?: 'UserPersonalData';
   email: Scalars['String'];
-  name: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
   isActive: Scalars['Boolean'];
 };
 
@@ -185,12 +105,6 @@ export type ResolversTypes = ResolversObject<{
   UserPersonalData: ResolverTypeWrapper<UserPersonalData>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
-  Mutation: ResolverTypeWrapper<{}>;
-  SignInResponse: ResolverTypeWrapper<SignInResponse>;
-  requestPasswordResetResponse: ResolverTypeWrapper<RequestPasswordResetResponse>;
-  SignUpResponse: ResolverTypeWrapper<SignUpResponse>;
-  Subscription: ResolverTypeWrapper<{}>;
-  SocketResponse: ResolverTypeWrapper<SocketResponse>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -199,68 +113,21 @@ export type ResolversParentTypes = ResolversObject<{
   UserPersonalData: UserPersonalData;
   String: Scalars['String'];
   Boolean: Scalars['Boolean'];
-  Mutation: {};
-  SignInResponse: SignInResponse;
-  requestPasswordResetResponse: RequestPasswordResetResponse;
-  SignUpResponse: SignUpResponse;
-  Subscription: {};
-  SocketResponse: SocketResponse;
-}>;
-
-export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
-  confirmVerificationToken?: Resolver<ResolversTypes['SignInResponse'], ParentType, ContextType, RequireFields<MutationConfirmVerificationTokenArgs, 'verificationToken' | 'email'>>;
-  requestPasswordReset?: Resolver<Maybe<ResolversTypes['requestPasswordResetResponse']>, ParentType, ContextType, RequireFields<MutationRequestPasswordResetArgs, never>>;
-  resendVerificationToken?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationResendVerificationTokenArgs, 'email'>>;
-  resetPassword?: Resolver<ResolversTypes['SignInResponse'], ParentType, ContextType, RequireFields<MutationResetPasswordArgs, 'password' | 'confirmPassword' | 'resetToken'>>;
-  signIn?: Resolver<ResolversTypes['SignInResponse'], ParentType, ContextType, RequireFields<MutationSignInArgs, 'email' | 'password'>>;
-  signUp?: Resolver<ResolversTypes['SignUpResponse'], ParentType, ContextType, RequireFields<MutationSignUpArgs, 'name' | 'email' | 'password' | 'confirmPassword'>>;
 }>;
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   me?: Resolver<ResolversTypes['UserPersonalData'], ParentType, ContextType>;
 }>;
 
-export type RequestPasswordResetResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['requestPasswordResetResponse'] = ResolversParentTypes['requestPasswordResetResponse']> = ResolversObject<{
-  email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type SignInResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['SignInResponse'] = ResolversParentTypes['SignInResponse']> = ResolversObject<{
-  user?: Resolver<Maybe<ResolversTypes['UserPersonalData']>, ParentType, ContextType>;
-  token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type SignUpResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['SignUpResponse'] = ResolversParentTypes['SignUpResponse']> = ResolversObject<{
-  user?: Resolver<Maybe<ResolversTypes['UserPersonalData']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type SocketResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['SocketResponse'] = ResolversParentTypes['SocketResponse']> = ResolversObject<{
-  user?: Resolver<Maybe<ResolversTypes['UserPersonalData']>, ParentType, ContextType>;
-  socketId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type SubscriptionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription']> = ResolversObject<{
-  startOAuth?: SubscriptionResolver<Maybe<ResolversTypes['SocketResponse']>, "startOAuth", ParentType, ContextType, RequireFields<SubscriptionStartOAuthArgs, 'socketId'>>;
-}>;
-
 export type UserPersonalDataResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserPersonalData'] = ResolversParentTypes['UserPersonalData']> = ResolversObject<{
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   isActive?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type Resolvers<ContextType = any> = ResolversObject<{
-  Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
-  requestPasswordResetResponse?: RequestPasswordResetResponseResolvers<ContextType>;
-  SignInResponse?: SignInResponseResolvers<ContextType>;
-  SignUpResponse?: SignUpResponseResolvers<ContextType>;
-  SocketResponse?: SocketResponseResolvers<ContextType>;
-  Subscription?: SubscriptionResolvers<ContextType>;
   UserPersonalData?: UserPersonalDataResolvers<ContextType>;
 }>;
 
