@@ -53,7 +53,7 @@ const googleController = async (req: any, res: any) => {
       });
     }
   }
-  res.cookie("token", token, { httpOnly: true });
+  res.cookie("token", token, { httpOnly: false });
   // 처음 요청한 페이지로 redirect
   res.redirect(302, env.client_url);
   res.end();
