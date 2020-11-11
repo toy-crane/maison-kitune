@@ -2,15 +2,10 @@ import passport from "passport";
 import { Response, Request, NextFunction } from "express";
 import { UserPersonalData } from "../types/types";
 import env from "../env";
+import { ExtractJwt } from "passport-jwt";
 
 const JWT_CONFIG = {
-  jwtFromRequest: function (req) {
-    let token = null;
-    if (req && req.cookies) {
-      token = req.cookies["token"];
-    }
-    return token;
-  },
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: env.jwt_secret,
 };
 
