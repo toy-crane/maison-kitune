@@ -2,7 +2,6 @@ import passport from "passport";
 import env from "../env";
 import { githubCallbackURL } from "./config";
 import { prisma } from "../context";
-import createJWT from "../utils/auth/createJWT";
 import createRandomToken from "../utils/auth/createSecret";
 
 const GITHUB_CONFIG = {
