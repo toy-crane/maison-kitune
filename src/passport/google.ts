@@ -18,24 +18,31 @@ const googleController = async (req: any, res: any) => {
   const email = req.user.emails[0].value;
   const photo = req.user.photos[0].value;
   const googleId = req.user.id;
-  let user, token;
+  let user;
   const userExists = await prisma.user.findOne({
     where: {
       email,
     },
   });
+  const refreshToken = createRandomToken();
   if (userExists) {
     if (userExists.googleId !== googleId) {
       res.status(500).json({
         error: "이미 다른 소셜 로그인으로 회원 가입이 되어있는 이메일입니다.",
       });
     } else {
+      // 로그인 시 refresh token 신규 발급
       user = userExists;
-      token = createJWT(user.id, user.email);
+      await prisma.user.update({
+        where: { id: user.id },
+        data: {
+          refreshToken,
+        },
+      });
     }
   } else {
     try {
-      const refreshToken = createRandomToken();
+      // 회원 가입 시, User 생성
       user = await prisma.user.create({
         data: {
           email,
@@ -49,14 +56,13 @@ const googleController = async (req: any, res: any) => {
           },
         },
       });
-      token = createJWT(user.id, user.email);
     } catch (e) {
       res.status(500).json({
         error: e.message,
       });
     }
   }
-  res.cookie("token", token, { httpOnly: false });
+  res.cookie("refreshToken", refreshToken, { httpOnly: true });
   // 처음 요청한 페이지로 redirect
   res.redirect(302, env.client_url);
   res.end();
