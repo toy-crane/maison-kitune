@@ -3,6 +3,7 @@ import env from "../env";
 import { githubCallbackURL } from "./config";
 import { prisma } from "../context";
 import createJWT from "../utils/auth/createJWT";
+import createRandomToken from "../utils/auth/createSecret";
 
 const GITHUB_CONFIG = {
   clientID: env.github_client_id,
@@ -35,11 +36,13 @@ const githubController = async (req: any, res: any) => {
     }
   } else {
     try {
+      const refreshToken = createRandomToken(20);
       user = await prisma.user.create({
         data: {
           email,
           githubId,
           isActive: false,
+          refreshToken,
           profile: {
             create: {
               avatar: photo,
@@ -47,17 +50,17 @@ const githubController = async (req: any, res: any) => {
           },
         },
       });
-      token = createJWT(user.id, user.email);
+      res.cookie("refreshToken", refreshToken, { httpOnly: true });
+      // 처음 요청한 페이지로 redirect
+      res.redirect(302, env.client_url);
+      res.end();
     } catch (e) {
       res.status(500).json({
         error: e.message,
       });
+      res.end();
     }
   }
-  res.cookie("token", token, { httpOnly: false });
-  // 처음 요청한 페이지로 redirect
-  res.redirect(302, env.client_url);
-  res.end();
 };
 
 export { githubAuth, githubController, GITHUB_CONFIG };

@@ -1,15 +1,8 @@
 import { PrismaClient } from "@prisma/client";
-import e from "cors";
 import { Request, Response } from "express";
-import { UserPersonalData } from "./types/types";
+import { Context } from "./types/context-types";
 
 export const prisma = new PrismaClient();
-export interface Context {
-  prisma: PrismaClient;
-  req: Request;
-  res: Response;
-  user: UserPersonalData | null;
-}
 
 function getUser(req: any) {
   // socket과 일반 graphql간에 request type이 달라서 분기처리 해야함.

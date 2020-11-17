@@ -1,4 +1,5 @@
 import { GraphQLResolveInfo } from 'graphql';
+import { Context } from './context-types';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 /** All built-in and custom scalars, mapped to their actual values */
@@ -10,20 +11,24 @@ export type Scalars = {
   Float: number;
 };
 
-export type Query = {
-  __typename?: 'Query';
-  me: UserPersonalData;
+export type Mutation = {
+  __typename?: 'Mutation';
+  createAuthToken: Scalars['String'];
 };
 
-export type UserPersonalData = {
-  __typename?: 'UserPersonalData';
+export type Query = {
+  __typename?: 'Query';
+  me: User;
+};
+
+export type User = {
+  __typename?: 'User';
   email: Scalars['String'];
   name?: Maybe<Scalars['String']>;
   isActive: Scalars['Boolean'];
 };
 
-export type WithIndex<TObject> = TObject & Record<string, any>;
-export type ResolversObject<TObject> = WithIndex<TObject>;
+
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
@@ -100,40 +105,47 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 ) => TResult | Promise<TResult>;
 
 /** Mapping between all available schema types and the resolvers types */
-export type ResolversTypes = ResolversObject<{
+export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
-  UserPersonalData: ResolverTypeWrapper<UserPersonalData>;
+  User: ResolverTypeWrapper<User>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
-}>;
+  Mutation: ResolverTypeWrapper<{}>;
+};
 
 /** Mapping between all available schema types and the resolvers parents */
-export type ResolversParentTypes = ResolversObject<{
+export type ResolversParentTypes = {
   Query: {};
-  UserPersonalData: UserPersonalData;
+  User: User;
   String: Scalars['String'];
   Boolean: Scalars['Boolean'];
-}>;
+  Mutation: {};
+};
 
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
-  me?: Resolver<ResolversTypes['UserPersonalData'], ParentType, ContextType>;
-}>;
+export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  createAuthToken?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+};
 
-export type UserPersonalDataResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserPersonalData'] = ResolversParentTypes['UserPersonalData']> = ResolversObject<{
+export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  me?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
+};
+
+export type UserResolvers<ContextType = Context, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   isActive?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
+};
 
-export type Resolvers<ContextType = any> = ResolversObject<{
+export type Resolvers<ContextType = Context> = {
+  Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
-  UserPersonalData?: UserPersonalDataResolvers<ContextType>;
-}>;
+  User?: UserResolvers<ContextType>;
+};
 
 
 /**
  * @deprecated
  * Use "Resolvers" root object instead. If you wish to get "IResolvers", add "typesPrefix: I" to your config.
  */
-export type IResolvers<ContextType = any> = Resolvers<ContextType>;
+export type IResolvers<ContextType = Context> = Resolvers<ContextType>;

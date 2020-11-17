@@ -1,6 +1,6 @@
 import passport from "passport";
 import { Response, Request, NextFunction } from "express";
-import { UserPersonalData } from "../types/types";
+import { UserModel } from "../types/models-types";
 import env from "../env";
 import { ExtractJwt } from "passport-jwt";
 
@@ -10,16 +10,12 @@ const JWT_CONFIG = {
 };
 
 const authenticateJWT = (req: Request, res: Response, next: NextFunction) =>
-  passport.authenticate(
-    "jwt",
-    { session: false },
-    (err, user: UserPersonalData) => {
-      if (user) {
-        console.log(user);
-        req.user = user;
-      }
-      next();
+  passport.authenticate("jwt", { session: false }, (err, user: UserModel) => {
+    if (user) {
+      console.log(user);
+      req.user = user;
     }
-  )(req, res, next);
+    next();
+  })(req, res, next);
 
 export { authenticateJWT, JWT_CONFIG };

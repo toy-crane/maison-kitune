@@ -1,9 +1,8 @@
 import { IResolvers } from "graphql-tools";
-import { Context } from "../../../context";
 
 const query: IResolvers = {
   Query: {
-    me: async (_, __, ctx: Context) => {
+    me: async (_, __, ctx) => {
       const { user } = ctx;
       return user;
     },

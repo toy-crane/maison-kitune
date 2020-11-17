@@ -1,4 +1,4 @@
-type UserPersonalData {
+type User {
   email: String!
   name: String
   isActive: Boolean!

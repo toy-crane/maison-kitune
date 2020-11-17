@@ -2,9 +2,11 @@ overwrite: true
 schema:
   - "./src/gql/**/*.gql"
 generates:
-  src/types/graphql.d.ts:
+  src/types/resolvers-types.ts:
     config:
-      useIndexSignature: true
+      contextType: ./context-types#Context
+    mapper:
+      User: ./models#UserModel
     plugins:
       - "typescript"
       - "typescript-resolvers"
