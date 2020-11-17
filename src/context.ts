@@ -6,18 +6,18 @@ import { UserModel } from "./types/models-types";
 
 export const prisma = new PrismaClient();
 
-async function getUser(req: Request): Promise<UserModel | null> {
-  // header에 포함되어 있는 토큰을 기반으로 request에 user를 넣어준다.
+// JWT 미들웨어를 통해서 저장된 decodedUser를 return한다.
+function getUser(req: Request): UserModel | null {
   return req.decodedUser;
 }
 
-export async function createContext(req: ContextParameters): Promise<Context> {
-  // graphql yoga req에서 request만 꺼냄
+export function createContext(req: ContextParameters): Context {
+  // graphql yoga req에서 request, response만 꺼냄
   const context = {
     prisma,
     req: req.request,
     res: req.response,
-    user: await getUser(req.request),
+    user: getUser(req.request),
   };
   return context;
 }

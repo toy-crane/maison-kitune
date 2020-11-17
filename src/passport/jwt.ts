@@ -9,6 +9,7 @@ const JWT_CONFIG = {
   secretOrKey: env.jwt_secret,
 };
 
+// express에서 사용하는 미들웨어
 const authenticateJWT = (req: Request, res: Response, next: NextFunction) =>
   passport.authenticate("jwt", { session: false }, (err, user: UserModel) => {
     if (user) {
