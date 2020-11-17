@@ -15,3 +15,5 @@
 20201106024249-github-id-to-string
 20201111080346-passwordless
 20201111090648-refresh-token
+20201117054455-sh-token
+20201117054744-make-refresh-token-notnull

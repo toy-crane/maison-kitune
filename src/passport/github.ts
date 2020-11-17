@@ -36,7 +36,7 @@ const githubController = async (req: any, res: any) => {
     }
   } else {
     try {
-      const refreshToken = createRandomToken(20);
+      const refreshToken = createRandomToken();
       user = await prisma.user.create({
         data: {
           email,

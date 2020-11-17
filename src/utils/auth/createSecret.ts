@@ -1,7 +1,7 @@
-import cryptoRandomString from "crypto-random-string";
+import { v4 as uuidv4 } from "uuid";
 
-const createRandomToken = (length: number = 10) => {
-  const secret = cryptoRandomString({ length, type: "url-safe" });
+const createRandomToken = () => {
+  const secret = uuidv4();
   return secret;
 };
 
