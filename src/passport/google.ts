@@ -3,6 +3,7 @@ import env from "../env";
 import { googleCallbackURL } from "./config";
 import { prisma } from "../context";
 import createJWT from "../utils/auth/createJWT";
+import createRandomToken from "../utils/auth/createSecret";
 
 const GOOGLE_CONFIG = {
   clientID: env.google_client_id,
@@ -34,10 +35,12 @@ const googleController = async (req: any, res: any) => {
     }
   } else {
     try {
+      const refreshToken = createRandomToken();
       user = await prisma.user.create({
         data: {
           email,
           googleId,
+          refreshToken,
           isActive: false,
           profile: {
             create: {
