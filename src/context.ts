@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import { Request, Response } from "express";
 import { Context } from "./types/context-types";
 import { ContextParameters } from "graphql-yoga/dist/types";
 
@@ -14,15 +13,12 @@ function getUser(req: any) {
   }
 }
 
-export async function createContext(
-  req: ContextParameters,
-  res: Response
-): Promise<Context> {
+export async function createContext(req: ContextParameters): Promise<Context> {
   // graphql yoga req에서 request만 꺼냄
   const context = {
     prisma,
     req: req.request,
-    res,
+    res: req.response,
     user: getUser(req),
   };
   return context;
