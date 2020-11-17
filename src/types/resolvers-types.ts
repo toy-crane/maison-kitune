@@ -11,9 +11,14 @@ export type Scalars = {
   Float: number;
 };
 
+export type AccessToken = {
+  __typename?: 'accessToken';
+  token: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
-  createAuthToken: Scalars['String'];
+  createAuthToken?: Maybe<AccessToken>;
 };
 
 export type Query = {
@@ -111,6 +116,7 @@ export type ResolversTypes = {
   String: ResolverTypeWrapper<Scalars['String']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Mutation: ResolverTypeWrapper<{}>;
+  accessToken: ResolverTypeWrapper<AccessToken>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -120,10 +126,16 @@ export type ResolversParentTypes = {
   String: Scalars['String'];
   Boolean: Scalars['Boolean'];
   Mutation: {};
+  accessToken: AccessToken;
+};
+
+export type AccessTokenResolvers<ContextType = Context, ParentType extends ResolversParentTypes['accessToken'] = ResolversParentTypes['accessToken']> = {
+  token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  createAuthToken?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  createAuthToken?: Resolver<Maybe<ResolversTypes['accessToken']>, ParentType, ContextType>;
 };
 
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
@@ -138,6 +150,7 @@ export type UserResolvers<ContextType = Context, ParentType extends ResolversPar
 };
 
 export type Resolvers<ContextType = Context> = {
+  accessToken?: AccessTokenResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
