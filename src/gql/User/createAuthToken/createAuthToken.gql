@@ -1,3 +1,7 @@
+type accessToken {
+  token: String!
+}
+
 type Mutation {
-  createAuthToken: String!
+  createAuthToken: accessToken
 }
