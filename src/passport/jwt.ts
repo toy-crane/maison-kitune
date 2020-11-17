@@ -12,8 +12,7 @@ const JWT_CONFIG = {
 const authenticateJWT = (req: Request, res: Response, next: NextFunction) =>
   passport.authenticate("jwt", { session: false }, (err, user: UserModel) => {
     if (user) {
-      console.log(user);
-      req.user = user;
+      req.decodedUser = user;
     }
     next();
   })(req, res, next);
