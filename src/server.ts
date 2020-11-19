@@ -8,11 +8,13 @@ import router from "./router";
 import passportInit from "./passport/passport.init";
 import { authenticateJWT } from "./passport/jwt";
 import env from "./env";
+import { permissions } from "./permissions";
 
 const server = new GraphQLServer({
   typeDefs,
   resolvers,
   context: createContext,
+  middlewares: [permissions],
 });
 
 // express 미들웨어 순서 중요!
