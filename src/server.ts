@@ -21,7 +21,7 @@ passportInit();
 server.express.use(passport.initialize());
 // request에 req.cookies 만들어주는 미들웨어
 server.express.use(cookieParser());
-// request에 req.user 만들어주는 jwt 인증 미들웨어
+// request에 req.decodedUser 만들어주는 jwt 인증 미들웨어
 server.express.use(authenticateJWT);
 // router 추가
 server.express.use("/", router);
