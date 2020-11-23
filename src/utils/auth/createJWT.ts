@@ -3,5 +3,5 @@ import env from "../../env";
 
 const JWT_SECRET = env.jwt_secret;
 export default (id: number, email: string): string => {
-  return jwt.sign({ id, email }, JWT_SECRET, { expiresIn: "3d" });
+  return jwt.sign({ id, email }, JWT_SECRET, { expiresIn: "1h" });
 };
