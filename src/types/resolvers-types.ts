@@ -23,7 +23,7 @@ export type Mutation = {
 
 export type Query = {
   __typename?: 'Query';
-  getMe: User;
+  me: User;
 };
 
 export type User = {
@@ -139,7 +139,7 @@ export type MutationResolvers<ContextType = Context, ParentType extends Resolver
 };
 
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  getMe?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
+  me?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
 };
 
 export type UserResolvers<ContextType = Context, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
