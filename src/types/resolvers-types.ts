@@ -19,6 +19,7 @@ export type AccessToken = {
 export type Mutation = {
   __typename?: 'Mutation';
   createAuthToken?: Maybe<AccessToken>;
+  logout?: Maybe<Scalars['Boolean']>;
 };
 
 export type Query = {
@@ -136,6 +137,7 @@ export type AccessTokenResolvers<ContextType = Context, ParentType extends Resol
 
 export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   createAuthToken?: Resolver<Maybe<ResolversTypes['accessToken']>, ParentType, ContextType>;
+  logout?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
 };
 
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
