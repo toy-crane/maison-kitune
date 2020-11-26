@@ -40,8 +40,9 @@ const server = new ApolloServer({
   context: createContext,
 });
 
-// apollo server에 express 연결
-server.applyMiddleware({ app });
+// apollo server에 express 연결 
+// apollo server cors 옵션 disable시켜야 express의 cors 옵션이 동작함
+server.applyMiddleware({ app, cors: false });
 
 // express 실행
 app.listen({ port: 4000 }, () =>
