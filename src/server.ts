@@ -41,7 +41,7 @@ const server = new ApolloServer({
 });
 
 // apollo server에 express 연결
-server.applyMiddleware({ app, cors: false });
+server.applyMiddleware({ app });
 
 // express 실행
 app.listen({ port: 4000 }, () =>
