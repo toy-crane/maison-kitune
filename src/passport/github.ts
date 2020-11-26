@@ -65,7 +65,7 @@ const githubController = async (req: any, res: any) => {
   }
   res.cookie("refreshToken", refreshToken, { httpOnly: true });
   // 처음 요청한 페이지로 redirect
-  res.redirect(302, `${env.client_url}/sign-in-success`);
+  res.redirect(302, `${env.client_url}`);
   res.end();
 };
 
