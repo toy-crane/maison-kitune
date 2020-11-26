@@ -7,6 +7,6 @@ export const isAuthenticated = rule({ cache: "contextual" })(
     if (ctx.user) {
       return true;
     }
-    return new AuthenticationError("must authenticate");
+    return new AuthenticationError("인증이 반드시 필요한 접근입니다.");
   }
 );
