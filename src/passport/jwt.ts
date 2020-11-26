@@ -8,14 +8,18 @@ const JWT_CONFIG = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: env.jwt_secret,
   ignoreExpiration: false,
-  maxAge: "1h",
+  jsonWebTokenOptions: {
+    maxAge: env.jwt_max_age,
+  },
 };
 
 // express에서 사용하는 미들웨어
 const authenticateJWT = (req: Request, res: Response, next: NextFunction) =>
-  passport.authenticate("jwt", { session: false }, (err, user: UserModel) => {
+  passport.authenticate("jwt", (err, user: UserModel, info, status) => {
     if (user) {
       req.decodedUser = user;
+    } else if (info && info.name) {
+      req.jwtError = info.name;
     }
     next();
   })(req, res, next);

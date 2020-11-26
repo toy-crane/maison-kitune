@@ -5,6 +5,7 @@ declare global {
   namespace Express {
     interface Request {
       decodedUser: UserModel | null;
+      jwtError: string | null;
     }
   }
 }

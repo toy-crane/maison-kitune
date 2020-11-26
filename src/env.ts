@@ -17,4 +17,5 @@ export default {
   google_secret: process.env.GOOGLE_SECRET || "",
   github_client_id: process.env.GITHUB_CLIENT_ID || "",
   github_secret: process.env.GITHUB_SECRET || "",
+  jwt_max_age: process.env.JWT_MAX_AGE || "",
 };
