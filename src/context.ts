@@ -1,7 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { Context } from "./types/context-types";
-import { ContextParameters } from "graphql-yoga/dist/types";
-import { Request } from "express";
+import { Request, Response } from "express";
 import { UserModel } from "./types/models-types";
 
 export const prisma = new PrismaClient();
@@ -11,13 +10,18 @@ function getUser(req: Request): UserModel | null {
   return req.decodedUser;
 }
 
-export function createContext(req: ContextParameters): Context {
-  // graphql yoga req에서 request, response만 꺼냄
+export function createContext({
+  req,
+  res,
+}: {
+  req: Request;
+  res: Response;
+}): Context {
   const context = {
     prisma,
-    req: req.request,
-    res: req.response,
-    user: getUser(req.request),
+    req: req,
+    res: res,
+    user: getUser(req),
   };
   return context;
 }

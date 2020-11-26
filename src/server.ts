@@ -1,44 +1,49 @@
 import "./env";
-import { GraphQLServer } from "graphql-yoga";
 import cookieParser from "cookie-parser";
-import { resolvers, typeDefs } from "./schema";
+import { schema } from "./schema";
 import passport from "passport";
-import { createContext } from "./context";
 import router from "./router";
 import passportInit from "./passport/passport.init";
 import { authenticateJWT } from "./passport/jwt";
 import env from "./env";
 import { permissions } from "./permissions";
+import { ApolloServer } from "apollo-server-express";
+import express from "express";
+import cors from "cors";
+import { createContext } from "./context";
+import { applyMiddleware } from "graphql-middleware";
 
-const server = new GraphQLServer({
-  typeDefs,
-  resolvers,
-  context: createContext,
-  middlewares: [permissions],
-});
+// express server 초기화
+const app = express();
 
 // express 미들웨어 순서 중요!
 // passport 관련 초기화
 passportInit();
-server.express.use(passport.initialize());
+app.use(passport.initialize());
 // request에 req.cookies 만들어주는 미들웨어
-server.express.use(cookieParser());
+app.use(cookieParser());
 // request에 req.decodedUser 만들어주는 jwt 인증 미들웨어
-server.express.use(authenticateJWT);
+app.use(authenticateJWT);
 // router 추가
-server.express.use("/", router);
-
+app.use("/", router);
+// cors option 추가
 const corsOptions = {
   origin: [env.client_url],
   credentials: true,
 };
+app.use(cors(corsOptions));
 
-// Graphql Yoga 실행
-server.start(
-  {
-    playground: "/playground",
-    endpoint: "/graphql",
-    cors: corsOptions,
-  },
-  () => console.log("Server is running on localhost:4000")
+// apollo server 초기화
+const server = new ApolloServer({
+  // graphql shield 적용
+  schema: applyMiddleware(schema, permissions),
+  context: createContext,
+});
+
+// apollo server에 express 연결
+server.applyMiddleware({ app, cors: false });
+
+// express 실행
+app.listen({ port: 4000 }, () =>
+  console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
 );
