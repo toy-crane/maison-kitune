@@ -8,7 +8,10 @@ const resolver: Resolvers = {
     createAuthToken: async (_, __, { req, res, prisma }) => {
       const refreshToken = req.cookies["refreshToken"];
       if (!refreshToken) {
-        throw Error("refresh token이 없습니다.");
+        throw new ApolloError(
+          "refresh token이 없습니다.",
+          "DOES_NOT_EXISTS_REFRESH_TOKEN"
+        );
       }
       const user = await prisma.user.findOne({
         where: {

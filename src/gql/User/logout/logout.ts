@@ -6,7 +6,10 @@ const resolver: Resolvers = {
     logout: async (_, __, { req, prisma }) => {
       const refreshToken = req.cookies["refreshToken"];
       if (!refreshToken) {
-        throw Error("refresh token이 없습니다.");
+        throw new ApolloError(
+          "refresh token이 없습니다.",
+          "DOES_NOT_EXISTS_REFRESH_TOKEN"
+        );
       }
       try {
         await prisma.user.update({
