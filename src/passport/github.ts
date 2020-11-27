@@ -63,7 +63,8 @@ const githubController = async (req: any, res: any) => {
       res.end();
     }
   }
-  res.cookie("refreshToken", refreshToken, { httpOnly: true });
+  // 하루동안 refresh 토큰이 유효하도록 설정
+  res.cookie("refreshToken", refreshToken, { httpOnly: true, maxAge: 86400 });
   // 처음 요청한 페이지로 redirect
   res.redirect(302, `${env.client_url}/activate`);
   res.end();
