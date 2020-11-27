@@ -51,6 +51,7 @@ const googleController = async (req: any, res: any) => {
           profile: {
             create: {
               avatar: photo,
+              githubUrl: "none",
             },
           },
         },
