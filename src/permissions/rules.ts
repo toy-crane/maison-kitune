@@ -1,5 +1,5 @@
 import { rule } from "graphql-shield";
-import { AuthenticationError } from "apollo-server";
+import { AuthenticationError, ApolloError } from "apollo-server";
 
 export const isAuthenticated = rule({ cache: "contextual" })(
   async (_, __, { user, req }, ___) => {
@@ -10,7 +10,10 @@ export const isAuthenticated = rule({ cache: "contextual" })(
     if (jwtError === "TokenExpiredError") {
       return new AuthenticationError("Token 유효기간 만료");
     } else if (jwtError === "JsonWebTokenError") {
-      return new AuthenticationError("잘못된 토큰이 입력되었습니다.");
+      return new ApolloError(
+        "잘못된 ACCESS TOKEN입니다.",
+        "INVALID_ACCESS_TOKEN"
+      );
     }
     return new AuthenticationError("인증이 반드시 필요한 접근입니다.");
   }

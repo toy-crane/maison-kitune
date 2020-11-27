@@ -10,7 +10,7 @@ const resolver: Resolvers = {
       if (!refreshToken) {
         throw new ApolloError(
           "refresh token이 없습니다.",
-          "DOES_NOT_EXISTS_REFRESH_TOKEN"
+          "INVALID_REFRESH_TOKEN"
         );
       }
       const user = await prisma.user.findOne({
