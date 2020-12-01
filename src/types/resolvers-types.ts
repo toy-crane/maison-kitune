@@ -2,6 +2,7 @@ import { GraphQLResolveInfo } from 'graphql';
 import { Context } from './context-types';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -18,8 +19,15 @@ export type AccessToken = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  activateUser: User;
   createAuthToken?: Maybe<AccessToken>;
   logout?: Maybe<Scalars['Boolean']>;
+};
+
+
+export type MutationActivateUserArgs = {
+  mobile: Scalars['String'];
+  name: Scalars['String'];
 };
 
 export type Query = {
@@ -136,6 +144,7 @@ export type AccessTokenResolvers<ContextType = Context, ParentType extends Resol
 };
 
 export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  activateUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationActivateUserArgs, 'mobile' | 'name'>>;
   createAuthToken?: Resolver<Maybe<ResolversTypes['accessToken']>, ParentType, ContextType>;
   logout?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
 };

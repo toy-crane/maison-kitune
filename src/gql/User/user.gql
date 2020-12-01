@@ -1,5 +1,6 @@
 type User {
   email: String!
   name: String
+  mobile: String
   isActive: Boolean!
 }

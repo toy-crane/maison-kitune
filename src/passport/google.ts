@@ -25,27 +25,20 @@ const googleController = async (req: any, res: any) => {
   });
   const refreshToken = createRandomToken();
   if (userExists) {
-    if (userExists.googleId !== googleId) {
-      res.status(500).json({
-        error: "이미 다른 소셜 로그인으로 회원 가입이 되어있는 이메일입니다.",
-      });
-    } else {
-      // 로그인 시 refresh token 신규 발급
-      user = userExists;
-      await prisma.user.update({
-        where: { id: user.id },
-        data: {
-          refreshToken,
-        },
-      });
-    }
+    // 로그인 시 refresh token 신규 발급
+    user = userExists;
+    await prisma.user.update({
+      where: { id: user.id },
+      data: {
+        refreshToken,
+      },
+    });
   } else {
     try {
       // 회원 가입 시, User 생성
       user = await prisma.user.create({
         data: {
           email,
-          googleId,
           refreshToken,
           isActive: false,
           profile: {
