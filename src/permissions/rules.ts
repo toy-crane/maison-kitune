@@ -18,3 +18,14 @@ export const isAuthenticated = rule({ cache: "contextual" })(
     return new AuthenticationError("인증이 반드시 필요한 접근입니다.");
   }
 );
+
+export const isActivated = rule({ cache: "contextual" })(
+  async (_, __, { user }, ___) => {
+    const { isActive } = user;
+    if (!isActive) {
+      return new ApolloError("비활성화 계정입니다.", "ACCOUNT_NEED_ACTIVATED");
+    } else {
+      return true;
+    }
+  }
+);

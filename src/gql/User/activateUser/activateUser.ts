@@ -5,10 +5,7 @@ const resolver: Resolvers = {
   Mutation: {
     activateUser: async (_, { mobile, name }, { prisma, user }) => {
       if (user) {
-        const { isActive, id } = user;
-        if (isActive) {
-          throw new AuthenticationError("비활성화된 고객이 아닙니다.");
-        }
+        const { id } = user;
         const updatedUser = prisma.user.update({
           where: {
             id,
@@ -16,6 +13,7 @@ const resolver: Resolvers = {
           data: {
             name,
             mobile,
+            isActive: true,
           },
         });
         return updatedUser;
