@@ -1,5 +1,4 @@
 import { Resolvers } from "../../../types/resolvers-types";
-import { AuthenticationError } from "apollo-server";
 
 const resolver: Resolvers = {
   Mutation: {
