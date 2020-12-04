@@ -39,6 +39,7 @@ export type User = {
   __typename?: 'User';
   email: Scalars['String'];
   name?: Maybe<Scalars['String']>;
+  mobile?: Maybe<Scalars['String']>;
   isActive: Scalars['Boolean'];
 };
 
@@ -156,6 +157,7 @@ export type QueryResolvers<ContextType = Context, ParentType extends ResolversPa
 export type UserResolvers<ContextType = Context, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  mobile?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   isActive?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
