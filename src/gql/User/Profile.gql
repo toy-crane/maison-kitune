@@ -1,0 +1,5 @@
+type Profile {
+  avatar: String
+  bio: String
+  githubUrl: String
+}
