@@ -18,7 +18,7 @@ const OauthCallback = (
 // JWT에서 사용하는 콜백
 const jwtCallback: VerifiedCallback = async (payload, cb) => {
   try {
-    const user = await prisma.user.findOne({
+    const user = await prisma.user.findUnique({
       where: { id: payload.id },
     });
     if (user) {

@@ -18,7 +18,7 @@ const googleController = async (req: any, res: any) => {
   const photo = req.user.photos[0].value;
   const googleId = req.user.id;
   let user;
-  const userExists = await prisma.user.findOne({
+  const userExists = await prisma.user.findUnique({
     where: {
       email,
     },

@@ -20,7 +20,7 @@ const githubController = async (req: any, res: any) => {
   const email = req.user.emails[0].value;
   const githubUrl = req.user.profileUrl;
   let user;
-  const userExists = await prisma.user.findOne({
+  const userExists = await prisma.user.findUnique({
     where: {
       email,
     },

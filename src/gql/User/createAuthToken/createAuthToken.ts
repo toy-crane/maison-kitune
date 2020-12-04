@@ -13,7 +13,7 @@ const resolver: Resolvers = {
           "INVALID_REFRESH_TOKEN"
         );
       }
-      const user = await prisma.user.findOne({
+      const user = await prisma.user.findUnique({
         where: {
           refreshToken,
         },
