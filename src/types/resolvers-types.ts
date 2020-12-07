@@ -38,7 +38,7 @@ export type MutationActivateUserArgs = {
 
 export type Profile = {
   __typename?: 'Profile';
-  avata?: Maybe<Scalars['String']>;
+  avatar?: Maybe<Scalars['String']>;
   bio?: Maybe<Scalars['String']>;
   githubUrl?: Maybe<Scalars['String']>;
 };
@@ -174,7 +174,7 @@ export type MutationResolvers<ContextType = Context, ParentType extends Resolver
 };
 
 export type ProfileResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Profile'] = ResolversParentTypes['Profile']> = {
-  avata?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  avatar?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   bio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   githubUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
