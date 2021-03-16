@@ -50,6 +50,7 @@ export type Query = {
 
 export type User = {
   __typename?: 'User';
+  id: Scalars['Int'];
   email: Scalars['String'];
   name?: Maybe<Scalars['String']>;
   mobile?: Maybe<Scalars['String']>;
@@ -137,6 +138,7 @@ export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   me: ResolverTypeWrapper<Me>;
   User: ResolverTypeWrapper<User>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Profile: ResolverTypeWrapper<Profile>;
@@ -149,6 +151,7 @@ export type ResolversParentTypes = {
   Query: {};
   me: Me;
   User: User;
+  Int: Scalars['Int'];
   String: Scalars['String'];
   Boolean: Scalars['Boolean'];
   Profile: Profile;
@@ -185,6 +188,7 @@ export type QueryResolvers<ContextType = Context, ParentType extends ResolversPa
 };
 
 export type UserResolvers<ContextType = Context, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   mobile?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
