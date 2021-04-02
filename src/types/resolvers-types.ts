@@ -30,12 +30,19 @@ export type Mutation = {
   activateUser: User;
   createAuthToken?: Maybe<AccessToken>;
   logout?: Maybe<Scalars['Boolean']>;
+  registerRefundAccount: User;
 };
 
 
 export type MutationActivateUserArgs = {
   mobile: Scalars['String'];
   name: Scalars['String'];
+};
+
+
+export type MutationRegisterRefundAccountArgs = {
+  bankCode: Scalars['String'];
+  bankAccount: Scalars['String'];
 };
 
 export type Profile = {
@@ -57,6 +64,7 @@ export type User = {
   name?: Maybe<Scalars['String']>;
   mobile?: Maybe<Scalars['String']>;
   isActive: Scalars['Boolean'];
+  status?: Maybe<Scalars['String']>;
 };
 
 
@@ -176,6 +184,7 @@ export type MutationResolvers<ContextType = Context, ParentType extends Resolver
   activateUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationActivateUserArgs, 'mobile' | 'name'>>;
   createAuthToken?: Resolver<Maybe<ResolversTypes['accessToken']>, ParentType, ContextType>;
   logout?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  registerRefundAccount?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationRegisterRefundAccountArgs, 'bankCode' | 'bankAccount'>>;
 };
 
 export type ProfileResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Profile'] = ResolversParentTypes['Profile']> = {
@@ -195,6 +204,7 @@ export type UserResolvers<ContextType = Context, ParentType extends ResolversPar
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   mobile?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   isActive?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

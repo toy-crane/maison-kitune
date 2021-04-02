@@ -26,6 +26,8 @@ model User {
   updatedAt    DateTime @default(now()) @updatedAt
   refreshToken String?  @unique
   mobile       String?
+  RBankCode    String?
+  RBankAccount String?
   status       Status   @default(SIGN_UP)
   profile      Profile?
 }
