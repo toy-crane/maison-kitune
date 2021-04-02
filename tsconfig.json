@@ -7,6 +7,9 @@
     "esModuleInterop": true,
     "noImplicitAny": false,
     // custom type 경로 추가
-    "typeRoots": [ "./src/types", "./node_modules/@types",]
-  }
+    "rootDirs": ["src"],
+    "baseUrl": "src",
+    "typeRoots": ["./src/types", "./node_modules/@types"]
+  },
+  "include": ["src"]
 }
