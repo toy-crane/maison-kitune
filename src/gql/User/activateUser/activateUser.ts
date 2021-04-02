@@ -12,6 +12,7 @@ const resolver: Resolvers = {
           data: {
             name,
             mobile,
+            status: "ACTIVATED",
             isActive: true,
           },
         });

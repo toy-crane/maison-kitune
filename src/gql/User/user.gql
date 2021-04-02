@@ -4,4 +4,5 @@ type User {
   name: String
   mobile: String
   isActive: Boolean!
+  status: String
 }
