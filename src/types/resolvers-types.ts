@@ -64,9 +64,8 @@ export type User = {
   name?: Maybe<Scalars['String']>;
   mobile?: Maybe<Scalars['String']>;
   isActive: Scalars['Boolean'];
-  status?: Maybe<Scalars['String']>;
-  bankAccount?: Maybe<Scalars['String']>;
-  bankCode?: Maybe<Scalars['String']>;
+  RBankAccount?: Maybe<Scalars['String']>;
+  RBankCode?: Maybe<Scalars['String']>;
 };
 
 
@@ -206,9 +205,8 @@ export type UserResolvers<ContextType = Context, ParentType extends ResolversPar
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   mobile?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   isActive?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  status?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  bankAccount?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  bankCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  RBankAccount?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  RBankCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
