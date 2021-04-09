@@ -4,7 +4,6 @@ type User {
   name: String
   mobile: String
   isActive: Boolean!
-  status: String!
   RBankAccount: String
   RBankCode: String
 }

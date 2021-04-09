@@ -16,7 +16,6 @@ const resolver: Resolvers = {
           data: {
             RBankCode,
             RBankAccount,
-            status: "ACCOUNT_REGISTERED",
           },
         });
         return updatedUser;

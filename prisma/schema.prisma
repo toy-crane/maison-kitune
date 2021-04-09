@@ -28,12 +28,5 @@ model User {
   mobile       String?
   RBankCode    String?
   RBankAccount String?
-  status       Status   @default(SIGN_UP)
   profile      Profile?
-}
-
-enum Status {
-  SIGN_UP
-  ACTIVATED
-  ACCOUNT_REGISTERED
 }
