@@ -1,0 +1,7 @@
+type Class {
+  id: Int!
+  thumbnail: String!
+  name: String!
+  remarks: String!
+  status: String!
+}

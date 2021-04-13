@@ -30,3 +30,28 @@ model User {
   RBankAccount String?
   profile      Profile?
 }
+
+enum ClassStatus {
+  // 모집 준비중
+  PREPARING
+  // 모집중
+  RECRUITING
+  // 모집완료
+  RECRUITMENT_CLOSED
+  // 진행중
+  INPROGRESS
+  // 종료
+  CLOSED
+}
+
+model Class {
+  id            Int         @id @default(autoincrement())
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @default(now()) @updatedAt
+  thumbnail     String
+  name          String
+  remarks       String
+  startDateTime DateTime
+  endDateTime   DateTime
+  status        ClassStatus
+}
