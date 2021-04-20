@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/api/graphql", "destination": "/api/graphql" },
+    { "source": "/api/(.*)", "destination": "/api" }
+  ]
+}
