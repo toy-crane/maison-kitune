@@ -2,12 +2,20 @@ import { PrismaClient } from "@prisma/client";
 import { Context } from "./types/context-types";
 import { Request, Response } from "express";
 import { UserModel } from "./types/models-types";
+import jwt from "jsonwebtoken";
+import env from "./env";
 
 export const prisma = new PrismaClient();
 
-// JWT 미들웨어를 통해서 저장된 decodedUser를 return한다.
 function getUser(req: Request): UserModel | null {
-  return req.decodedUser;
+  const header = req.headers.authorization || "";
+  if (header) {
+    const token = header.replace("Bearer ", "");
+    const decoded = jwt.verify(token, env.jwt_secret);
+    return decoded;
+  } else {
+    return null;
+  }
 }
 
 export function createContext({
