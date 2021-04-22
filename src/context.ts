@@ -1,35 +1,43 @@
 import { PrismaClient } from "@prisma/client";
-import { Context } from "./types/context-types";
 import { Request, Response } from "express";
-import { UserModel } from "./types/models-types";
+import Cookies from "cookies";
 import jwt from "jsonwebtoken";
 import env from "./env";
 
 export const prisma = new PrismaClient();
 
-function getUser(req: Request): UserModel | null {
+async function getUser(req: Request) {
   const header = req.headers.authorization || "";
   if (header) {
     const token = header.replace("Bearer ", "");
-    const decoded = jwt.verify(token, env.jwt_secret);
-    return decoded;
+    const decoded: any = jwt.verify(token, env.jwt_secret);
+    const user = await prisma.user.findUnique({
+      where: { id: decoded.id },
+    });
+    return user;
   } else {
     return null;
   }
 }
 
-export function createContext({
+const getCookies = (req: Request, res: Response) => {
+  const cookies = new Cookies(req, res);
+  return cookies;
+};
+
+export async function createContext({
   req,
   res,
 }: {
   req: Request;
   res: Response;
-}): Context {
+}) {
   const context = {
     prisma,
     req: req,
     res: res,
-    user: getUser(req),
+    user: await getUser(req),
+    cookies: getCookies(req, res),
   };
   return context;
 }

@@ -5,8 +5,8 @@ import createRandomToken from "../../../utils/auth/createSecret";
 
 const resolver: Resolvers = {
   Mutation: {
-    createAuthToken: async (_, __, { req, res, prisma }) => {
-      const refreshToken = req.cookies["refreshToken"];
+    createAuthToken: async (_, __, { prisma, cookies }) => {
+      const refreshToken = cookies.get("refreshToken");
       if (!refreshToken) {
         throw new ApolloError(
           "refresh token이 없습니다.",
@@ -28,7 +28,11 @@ const resolver: Resolvers = {
       // 새로운 refresh Token을 생성
       const newRefreshToken = createRandomToken();
       // 새로운 토큰을 set-cookie한다.
-      res.cookie("refreshToken", newRefreshToken, { httpOnly: true });
+      cookies.set("refreshToken", newRefreshToken, {
+        httpOnly: true,
+        sameSite: "lax",
+        maxAge: 6 * 60 * 60,
+      });
       // 새로운 토큰 DB에 저장
       await prisma.user.update({
         where: {
