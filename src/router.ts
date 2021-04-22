@@ -8,5 +8,8 @@ router.get("/api/github", githubAuth);
 router.get("/api/github/callback", githubAuth, githubController);
 router.get("/api/google", googleAuth);
 router.get("/api/google/callback", googleAuth, googleController);
+router.get("/api/health-check", function (req, res) {
+  res.send("I`m find");
+});
 
 export default router;
