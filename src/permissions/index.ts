@@ -3,9 +3,7 @@ import { isAuthenticated, isActivated } from "./rules";
 
 export const permissions = shield(
   {
-    Query: {
-      me: isAuthenticated,
-    },
+    Query: {},
     Mutation: {
       activateUser: not(isActivated),
     },

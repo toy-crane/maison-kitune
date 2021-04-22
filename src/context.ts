@@ -7,6 +7,7 @@ import env from "./env";
 export const prisma = new PrismaClient();
 
 async function getUser(req: Request) {
+  console.log(req.headers.cookie);
   const header = req.headers.authorization || "";
   if (header) {
     const token = header.replace("Bearer ", "");
@@ -20,11 +21,6 @@ async function getUser(req: Request) {
   }
 }
 
-const getCookies = (req: Request, res: Response) => {
-  const cookies = new Cookies(req, res);
-  return cookies;
-};
-
 export async function createContext({
   req,
   res,
@@ -37,7 +33,7 @@ export async function createContext({
     req: req,
     res: res,
     user: await getUser(req),
-    cookies: getCookies(req, res),
+    cookies: new Cookies(req, res),
   };
   return context;
 }
