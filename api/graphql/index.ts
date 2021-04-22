@@ -11,13 +11,29 @@ const server = new ApolloServer({
   // graphql shield 적용
   schema: applyMiddleware(schema, permissions),
   context: createContext,
+  // playground에서 cookie 보내는 설정
+  playground: {
+    settings: {
+      "request.credentials": "include",
+    },
+  },
 });
 
 // cors 설정 추가
-const cors = microCors({
-  origin: [env.client_url],
-  credentials: true,
+const cors = microCors({});
+
+export default cors((req, res) => {
+  if (req.method === "OPTIONS") {
+    res.end();
+    return false;
+  }
+  return server.createHandler({
+    path: "/api/graphql",
+  })(req, res);
 });
 
-const handler = server.createHandler({ path: "/api/graphql" });
-export default cors((req, res) => handler(req, res));
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};

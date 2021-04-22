@@ -7,7 +7,6 @@ import env from "./env";
 export const prisma = new PrismaClient();
 
 async function getUser(req: Request) {
-  console.log(req.headers.cookie);
   const header = req.headers.authorization || "";
   if (header) {
     const token = header.replace("Bearer ", "");
