@@ -4,7 +4,6 @@ import { schema } from "./schema";
 import passport from "passport";
 import router from "./router";
 import passportInit from "./passport/passport.init";
-import { authenticateJWT } from "./passport/jwt";
 import env from "./env";
 import { permissions } from "./permissions";
 import { ApolloServer } from "apollo-server-express";
@@ -22,8 +21,6 @@ passportInit();
 app.use(passport.initialize());
 // request에 req.cookies 만들어주는 미들웨어
 app.use(cookieParser());
-// request에 req.decodedUser 만들어주는 jwt 인증 미들웨어
-app.use(authenticateJWT);
 // router 추가
 app.use("/", router);
 // cors option 추가
@@ -40,7 +37,7 @@ const server = new ApolloServer({
   context: createContext,
 });
 
-// apollo server에 express 연결 
+// apollo server에 express 연결
 // apollo server cors 옵션 disable시켜야 express의 cors 옵션이 동작함
 server.applyMiddleware({ app, cors: false });
 
