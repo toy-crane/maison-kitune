@@ -4,10 +4,8 @@ import passport from "passport";
 import router from "./router";
 import passportInit from "./passport/passport.init";
 import env from "./env";
-import { ApolloServer } from "apollo-server-express";
 import express from "express";
 import cors from "cors";
-import config from "./config";
 
 // express server 초기화
 const app = express();
@@ -27,14 +25,4 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// apollo server 초기화
-const server = new ApolloServer(config);
-
-// apollo server에 express 연결
-// apollo server cors 옵션 disable시켜야 express의 cors 옵션이 동작함
-server.applyMiddleware({ app, cors: false, path: "/api/graphql" });
-
-// express 실행
-app.listen({ port: 5000 }, () =>
-  console.log(`🚀 Server ready at http://localhost:5000${server.graphqlPath}`)
-);
+export default app;

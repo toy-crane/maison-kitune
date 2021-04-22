@@ -1,26 +1,4 @@
-import env from "../src/env";
-import cookieParser from "cookie-parser";
-import passport from "passport";
-import router from "../src/router";
-import passportInit from "../src/passport/passport.init";
-import express from "express";
-import cors from "cors";
+import app from "../src/server";
 
-// express server 초기화
-const app = express();
-// express 미들웨어 순서 중요!
-// passport 관련 초기화
-passportInit();
-app.use(passport.initialize());
-// request에 req.cookies 만들어주는 미들웨어
-app.use(cookieParser());
-// router 추가
-app.use("/", router);
-// cors option 추가
-const corsOptions = {
-  origin: [env.client_url],
-  credentials: true,
-};
-app.use(cors(corsOptions));
-
+// src 내부에 있는 express app을 가져와 그대로 외부로 내보낸다.
 export default app;

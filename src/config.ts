@@ -7,6 +7,11 @@ import { createContext } from "./context";
 const config: Config = {
   schema: applyMiddleware(schema, permissions),
   context: createContext,
+  playground: {
+    settings: {
+      "request.credentials": "include",
+    },
+  },
 };
 
 export default config;

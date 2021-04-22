@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"nodemon -e tsx,ts,gql -x ts-node src/server.ts\" \"npm run generate --watch\"",
+    "start": "concurrently \"nodemon -e tsx,ts,gql -x ts-node src/index.ts\" \"npm run generate --watch\"",
     "prestart": "npm run generate",
     "generate": "graphql-codegen --config codegen.yml",
     "migrate": "npx prisma migrate save --experimental && npx prisma migrate up --experimental && npx prisma generate && npm run generate"
