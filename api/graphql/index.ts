@@ -20,7 +20,10 @@ const server = new ApolloServer({
 });
 
 // cors 설정 추가
-const cors = microCors({});
+const cors = microCors({
+  allowCredentials: true,
+  origin: env.client_url,
+});
 
 export default cors((req, res) => {
   if (req.method === "OPTIONS") {
