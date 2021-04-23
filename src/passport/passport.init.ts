@@ -5,7 +5,8 @@ import { GITHUB_CONFIG } from "./github";
 import { GOOGLE_CONFIG } from "./google";
 
 // Oauth에서 사용하는 콜백
-const OauthCallback = (profile: any, cb: any) => cb(null, profile);
+const OauthCallback = (_: String, __: String, profile: any, cb: any) =>
+  cb(null, profile);
 
 export default () => {
   passport.serializeUser((user, cb) => cb(null, user));
