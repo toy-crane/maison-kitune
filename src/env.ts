@@ -2,7 +2,7 @@ import { config } from "dotenv";
 import { resolve } from "path";
 
 // dotenv loading
-config({ path: resolve(__dirname, ".env") });
+config({ path: resolve(__dirname, "../.env") });
 
 export default {
   node_env: process.env.NODE_ENV || "develop",
