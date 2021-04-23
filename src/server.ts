@@ -1,4 +1,3 @@
-import "./env";
 import cookieParser from "cookie-parser";
 import passport from "passport";
 import router from "./router";
