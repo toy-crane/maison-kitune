@@ -9,7 +9,8 @@
     "start:develop": "NODE_ENV=development vercel dev --listen 5000",
     "generate": "graphql-codegen --config codegen.yml",
     "migrate:local": "dotenv -e .env.local -- npx prisma migrate dev",
-    "migrate:develop": "dotenv -e .env.development -- npx prisma migrate dev"
+    "migrate:develop": "dotenv -e .env.development -- npx prisma migrate dev",
+    "build": "npx tsc"
   },
   "keywords": [],
   "author": "",
@@ -21,18 +22,19 @@
     "@graphql-tools/load-files": "^6.1.0",
     "@graphql-tools/merge": "^6.1.0",
     "@graphql-tools/schema": "^6.1.0",
-    "@types/node": "^14.14.3",
-    "nodemon": "^2.0.4",
-    "ts-node": "^9.0.0",
-    "typescript": "^4.0.2",
     "@types/bcryptjs": "^2.4.2",
     "@types/dotenv": "^8.2.0",
     "@types/express-session": "^1.17.0",
     "@types/jsonwebtoken": "^8.5.0",
+    "@types/node": "^14.14.3",
     "@types/nodemailer": "^6.4.0",
     "@types/passport-github2": "^1.2.4",
     "@types/passport-google-oauth20": "^2.0.4",
-    "@types/passport-jwt": "^3.0.3"
+    "@types/passport-jwt": "^3.0.3",
+    "@types/graphql": "^14.5.0",
+    "nodemon": "^2.0.4",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.2"
   },
   "dependencies": {
     "@prisma/client": "^2.12.1",

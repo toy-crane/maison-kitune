@@ -16,7 +16,6 @@ const googleAuth = passport.authenticate("google", {
 const googleController = async (req: any, res: any) => {
   const email = req.user.emails[0].value;
   const photo = req.user.photos[0].value;
-  const googleId = req.user.id;
   let user;
   const userExists = await prisma.user.findUnique({
     where: {

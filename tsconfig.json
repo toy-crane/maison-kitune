@@ -1,13 +1,25 @@
 {
   "compilerOptions": {
-    "sourceMap": true,
-    "outDir": "dist",
-    "strict": true,
+    "outDir": "public",
     "lib": ["esnext"],
-    "esModuleInterop": true,
+    "strict": true,
     "noImplicitAny": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "moduleResolution": "node",
+    "sourceMap": true
     // custom type 경로 추가
-    "typeRoots": ["./src/types", "./node_modules/@types"]
+    // "typeRoots": ["node_modules/@types", "src/types/**"]
   },
-  "include": ["src", "api"]
+  "include": ["src/**/*", "api"],
+  "exclude": [
+    "node_modules",
+    "**/__mocks__/**/*",
+    "**/__test__/**/*",
+    "**/*.spec.ts"
+  ]
 }
