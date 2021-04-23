@@ -1,7 +1,7 @@
 import passport from "passport";
 import { Response, Request, NextFunction } from "express";
 import { UserModel } from "../types/models-types";
-import env from "../env";
+import { env } from "../config";
 import { ExtractJwt } from "passport-jwt";
 
 const JWT_CONFIG = {

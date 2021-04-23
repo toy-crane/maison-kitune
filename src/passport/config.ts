@@ -1,4 +1,4 @@
-import env from "../env";
+import { env } from "../config";
 
 const providers = ["google", "github"];
 const callbacks = providers.map((provider) => {

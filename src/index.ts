@@ -1,6 +1,7 @@
-import "./env";
+// env 파일을 불러오기 위해 최초 import
+import "./config/env";
 import { ApolloServer } from "apollo-server-express";
-import ApolloConfig from "./config";
+import { ApolloConfig } from "./config";
 import app from "./server";
 
 // apollo server 초기화

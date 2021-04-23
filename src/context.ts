@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
 import Cookies from "cookies";
 import jwt from "jsonwebtoken";
-import env from "./env";
+import { env } from "./config";
 
 export const prisma = new PrismaClient();
 

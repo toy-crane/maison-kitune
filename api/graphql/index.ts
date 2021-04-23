@@ -1,7 +1,6 @@
 import { ApolloServer } from "apollo-server-micro";
 import microCors from "micro-cors";
-import env from "../../src/env";
-import ApolloConfig from "../../src/config";
+import { ApolloConfig, env } from "../../src/config";
 
 // apollo server 초기화
 const server = new ApolloServer(ApolloConfig);

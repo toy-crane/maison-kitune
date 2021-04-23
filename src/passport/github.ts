@@ -1,5 +1,5 @@
 import passport from "passport";
-import env from "../env";
+import { env } from "../config";
 import { githubCallbackURL } from "./config";
 import { prisma } from "../context";
 import createRandomToken from "../utils/auth/createSecret";

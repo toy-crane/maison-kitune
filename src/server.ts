@@ -2,7 +2,7 @@ import cookieParser from "cookie-parser";
 import passport from "passport";
 import router from "./router";
 import passportInit from "./passport/passport.init";
-import env from "./env";
+import { env } from "./config";
 import express from "express";
 import cors from "cors";
 

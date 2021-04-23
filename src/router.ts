@@ -1,4 +1,3 @@
-import { Cookie } from "cookies";
 import express from "express";
 import { githubAuth, githubController } from "./passport/github";
 import { googleAuth, googleController } from "./passport/google";
