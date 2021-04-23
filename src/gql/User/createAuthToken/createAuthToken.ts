@@ -20,6 +20,8 @@ const resolver: Resolvers = {
       });
 
       if (!user) {
+        // refresh token 삭제
+        cookies.set("refreshToken", "");
         throw new ApolloError(
           "유효하지 않은 refresh token입니다.",
           "INVALID_REFRESH_TOKEN"
