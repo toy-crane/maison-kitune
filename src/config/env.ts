@@ -1,8 +1,16 @@
 import { config } from "dotenv";
-import { resolve } from "path";
+import path from "path";
 
-// dotenv loading
-config({ path: resolve(__dirname, "../../.env") });
+config();
+if (process.env.NODE_ENV === "production") {
+  config({ path: path.join(__dirname, "../../.env.production") });
+} else if (process.env.NODE_ENV === "development") {
+  config({ path: path.join(__dirname, "../../.env.development") });
+} else if (process.env.NODE_ENV === "local") {
+  config({ path: path.join(__dirname, "../../.env.local") });
+} else {
+  throw new Error("NODE_ENV 환경 변수가 없습니다.");
+}
 
 export default {
   node_env: process.env.NODE_ENV || "develop",
