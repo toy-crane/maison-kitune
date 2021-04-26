@@ -1,4 +1,4 @@
-import { Resolvers } from "../../../types/resolvers-types";
+import { Resolvers } from "../../../@types/resolvers-types";
 import { ApolloError } from "apollo-server";
 
 const resolver: Resolvers = {

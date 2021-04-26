@@ -1,5 +1,5 @@
 import { ApolloError } from "apollo-server";
-import { Resolvers } from "../../../types/resolvers-types";
+import { Resolvers } from "../../../@types/resolvers-types";
 import createJWT from "../../../utils/auth/createJWT";
 import createRandomToken from "../../../utils/auth/createSecret";
 

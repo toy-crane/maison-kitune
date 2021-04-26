@@ -11,9 +11,9 @@
     "removeComments": false,
     "preserveConstEnums": true,
     "moduleResolution": "node",
-    "sourceMap": true
+    "sourceMap": false,
     // custom type 경로 추가
-    // "typeRoots": ["node_modules/@types", "src/types/**"]
+    "typeRoots": ["node_modules/@types", "src/@types/**"]
   },
   "include": ["src/**/*", "api"],
   "exclude": [
