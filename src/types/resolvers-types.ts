@@ -19,15 +19,6 @@ export type AccessToken = {
   token: Scalars['String'];
 };
 
-export type Class = {
-  __typename?: 'Class';
-  id: Scalars['Int'];
-  thumbnail: Scalars['String'];
-  name: Scalars['String'];
-  remarks: Scalars['String'];
-  status: Scalars['String'];
-};
-
 export type Me = {
   __typename?: 'me';
   user: User;
@@ -36,22 +27,22 @@ export type Me = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  activateUser: User;
-  createAuthToken?: Maybe<AccessToken>;
-  logout?: Maybe<Scalars['Boolean']>;
   registerRefundAccount: User;
-};
-
-
-export type MutationActivateUserArgs = {
-  mobile: Scalars['String'];
-  name: Scalars['String'];
+  activateUser: User;
+  logout?: Maybe<Scalars['Boolean']>;
+  createAuthToken?: Maybe<AccessToken>;
 };
 
 
 export type MutationRegisterRefundAccountArgs = {
   bankCode: Scalars['String'];
   bankAccount: Scalars['String'];
+};
+
+
+export type MutationActivateUserArgs = {
+  mobile: Scalars['String'];
+  name: Scalars['String'];
 };
 
 export type Profile = {
@@ -164,7 +155,6 @@ export type ResolversTypes = {
   Profile: ResolverTypeWrapper<Profile>;
   Mutation: ResolverTypeWrapper<{}>;
   accessToken: ResolverTypeWrapper<AccessToken>;
-  Class: ResolverTypeWrapper<Class>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -178,20 +168,10 @@ export type ResolversParentTypes = {
   Profile: Profile;
   Mutation: {};
   accessToken: AccessToken;
-  Class: Class;
 };
 
 export type AccessTokenResolvers<ContextType = Context, ParentType extends ResolversParentTypes['accessToken'] = ResolversParentTypes['accessToken']> = {
   token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type ClassResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Class'] = ResolversParentTypes['Class']> = {
-  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  thumbnail?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  remarks?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  status?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -202,10 +182,10 @@ export type MeResolvers<ContextType = Context, ParentType extends ResolversParen
 };
 
 export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  activateUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationActivateUserArgs, 'mobile' | 'name'>>;
-  createAuthToken?: Resolver<Maybe<ResolversTypes['accessToken']>, ParentType, ContextType>;
-  logout?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   registerRefundAccount?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationRegisterRefundAccountArgs, 'bankCode' | 'bankAccount'>>;
+  activateUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationActivateUserArgs, 'mobile' | 'name'>>;
+  logout?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  createAuthToken?: Resolver<Maybe<ResolversTypes['accessToken']>, ParentType, ContextType>;
 };
 
 export type ProfileResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Profile'] = ResolversParentTypes['Profile']> = {
@@ -232,7 +212,6 @@ export type UserResolvers<ContextType = Context, ParentType extends ResolversPar
 
 export type Resolvers<ContextType = Context> = {
   accessToken?: AccessTokenResolvers<ContextType>;
-  Class?: ClassResolvers<ContextType>;
   me?: MeResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Profile?: ProfileResolvers<ContextType>;

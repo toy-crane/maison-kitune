@@ -1,7 +1,0 @@
-type accessToken {
-  token: String!
-}
-
-type Mutation {
-  createAuthToken: accessToken
-}

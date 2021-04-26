@@ -1,3 +1,0 @@
-type Mutation {
-  activateUser(mobile: String!, name: String!): User!
-}

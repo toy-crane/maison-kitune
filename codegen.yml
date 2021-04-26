@@ -1,6 +1,6 @@
 overwrite: true
 schema:
-  - "./src/gql/**/*.gql"
+  - "./src/gql/types/**.gql"
 generates:
   src/types/resolvers-types.ts:
     config:

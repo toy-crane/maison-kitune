@@ -1,9 +1,0 @@
-type User {
-  id: Int!
-  email: String!
-  name: String
-  mobile: String
-  isActive: Boolean!
-  RBankAccount: String
-  RBankCode: String
-}
